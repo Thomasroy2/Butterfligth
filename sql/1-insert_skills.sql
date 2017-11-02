@@ -1,0 +1,15 @@
+INSERT INTO skill (id, name, description,	effect,	base_attack,	rate_attack,	rate_priority,	rate_fail,	base_priority,	base_effect,	base_fail,	is_unique) VALUES
+(1, 'Secrétion',	'Aveugle l\'adversaire', 'enemy: -100luck -50%speed -50%defense',	15,	1,	45,	1,	45,	1,	0.8,	true),
+(2, 'Suicide',	'Suicide',	'self : -10000hp',	0,	1,	100,	1,	100,	100,	0.95,	true),
+(3, 'JANNOSCOUR',	'Demande l\'aide de Jeanne',	'self +50% defense +50%attack',	0,	1,	50,	1,	50,	1,	0.90,	true),
+(4, 'Jet de bonbon',	'Jette un bonbon à l\'adversaire',	'enemy : 50% chance increase a skill, 50% decrease',	0,	1,	80,	1,	30,	0.8,	0.70,	true),
+(5, 'Coup de patte',	'Coup de patte',	NULL,	25,	0.8,	60,	0.90,	20,	0,100,	false),
+(6, 'Bourrasque',	'Bourrasque avec une aile',	'enemy: -20% speed',	10,	50,	50,	0.90,	20,	0.5,	0.90,	false),
+(7, 'Regard perçant',	'Intimide l\'adversaire avec un regard insistant',	NULL,	0,	0,	100,	0,	100,	0,	100,	false),
+(8, 'Papilloken',	'Boule de feu insectoide',	NULL,	40,	50,	20,	0.90,	20,	0,	0.90,	false),
+(9, 'Maquette en allumette',	'Endort l\'adversaire d\'ennui',	'enemy: speed -60%  mortality +20%',	0,	0,	80,	0.70,	40,	0.75,	0.95,	true),
+(10, 'Charge',	'Charge l\'adversaire en avant', 'self: 20% chance hp-10',	40,	0.90,	75,	0.90,	75,	1,	0.90,	false),
+(11, 'Ralerie',	'Transfert les paris',	'enemy: enemyBet+=selfBet self:selfBet=0',	0,	1,	1,	0,	100,	1,	0,	true),
+(12, 'Dard éjectable',	'Projette le dard sur l\'ennemi',	'self: hp-50%',	40,	0.90,	90,	0.95,	90,	1,	0.95,	false),
+(13, 'MacDo',	'Mange un bon vieux doMac',	'self: HP+20 mortality+15%',	0,	0,	95,	0,	70,	1,	0,	true),
+(14, 'Katana dans ta geule',	'Coup d\'épée bien droit',	'self: attack+20% speed+10%',	50,	1,	1,	0.6,	70,	0.5,	0.6,	true);
