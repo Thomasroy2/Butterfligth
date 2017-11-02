@@ -7,4 +7,4 @@ INSERT INTO passive (id, name, description,	effect,	base_activation,	rate_activa
 (6, 'Réunion Saucisse',	'Gave de saucisse l\'adversaire',	'enemy: attack-30%',	20,	70,	true),
 (7, 'Bien droit',	'Bien dressé',	'if enemy.hp < 40 attack+20%',	20,	80,	true),
 (8, 'Gras du bide',	'Epaisse brioche encaissant les coups', 'next enemy attack deal -40% damage',	15,	80,	false),
-(9, 'Immature',	'Jeune et con',	'50% chance speed+20, 50% speed -10 attack-20',	45,	90,	false);
+(9, 'Immature',	'Jeune et con',	'50% chance speed+20, 50% speed-10 attack-20',	45,	90,	false);

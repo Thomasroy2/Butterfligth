@@ -1,4 +1,4 @@
-INSERT INTO butterfly (name,	catchphrase,	hp,	attack,	defense,	luck,	speed,	mortality,	unique_skill,	passive_skill) VALUES
+INSERT INTO butterfly (name,	catchphrase,	hp,	attack,	defense,	luck,	speed,	mortality,	unique_skill,	unique_passive) VALUES
 ('Grosse Mite',	'On en a jamais vu une aussi grosse',	2000,	2000,	2000,	2000,	2000,	0,	1,	7),
 ('MacronPillon',	'C NOTRE PROJET',	40,	50,	10,	90,	70,	8,	NULL,	9),
 ('L\'américain',	'AMERICA FUCK YEAH',	60,	80,	60,	20,	10,	5,	13,	8),

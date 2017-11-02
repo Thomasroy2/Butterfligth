@@ -36,7 +36,8 @@ CREATE TABLE `butterfly` (
   `luck` int(11) NOT NULL,
   `speed` int(11) NOT NULL,
   `mortality` int(11) NOT NULL,
-  `unique_skill` int(11) NOT NULL
+  `unique_skill` int(11) DEFAULT NULL,
+  `unique_passive` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -51,7 +52,8 @@ CREATE TABLE `passive` (
   `description` text NOT NULL,
   `effect` varchar(255) NOT NULL,
   `base_activation` int(11) NOT NULL,
-  `rate_activation` int(11) NOT NULL
+  `rate_activation` int(11) NOT NULL,
+  `is_unique` tinyint(1) NOT NULL COMMENT 'indicate if the passive is for a unique butterfly'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -74,9 +76,9 @@ CREATE TABLE `picture` (
 
 CREATE TABLE `skill` (
   `id` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
-  `description` int(11) NOT NULL,
-  `effect` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `effect` varchar(70) NOT NULL,
   `base_attack` int(11) NOT NULL,
   `rate_attack` varchar(20) NOT NULL,
   `rate_priority` varchar(20) NOT NULL,
@@ -84,7 +86,8 @@ CREATE TABLE `skill` (
   `rate_effect` varchar(20) NOT NULL,
   `base_priority` int(11) NOT NULL COMMENT 'base priority number of the skill',
   `base_effect` int(11) NOT NULL COMMENT 'base rate of activation for the effect',
-  `base_fail` int(11) NOT NULL COMMENT 'base fail number of the skill'
+  `base_fail` int(11) NOT NULL COMMENT 'base fail number of the skill',
+  `is_unique` tinyint(1) NOT NULL COMMENT 'indicate if the skill is for a unique butterfly'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -134,6 +137,8 @@ ALTER TABLE `butterfly`
 --
 ALTER TABLE `butterfly`
   ADD CONSTRAINT `butterfly_ibfk_1` FOREIGN KEY (`unique_skill`) REFERENCES `skill` (`id`);
+ALTER TABLE `butterfly`
+  ADD CONSTRAINT `butterfly_ibfk_2` FOREIGN KEY (`unique_passive`) REFERENCES `passive` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
