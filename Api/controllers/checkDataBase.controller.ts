@@ -1,4 +1,5 @@
-class checkDataBase {
+
+export class checkDataBase {
     
         id      : number
         table   : string
@@ -8,8 +9,15 @@ class checkDataBase {
             this.table  = null
         }
     
-        getparam2() {
-    
-            return null
+        // check le nombre d'id max d'une table
+        checkIdMaxDB (id : number, table : string): boolean{
+            //temp
+            return true
+        }
+            
+        //verifie que la donnée existe
+        checkIdDB(id : number, table : string): boolean{
+        //temp
+        return true 
         }
     }

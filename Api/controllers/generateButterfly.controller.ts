@@ -1,3 +1,7 @@
+import  { checkDataBase }  from "./checkDataBase.controller"
+/*
+ coder le check des id max
+ */
 class generateButterfly {
     
         idButterfly : number 
@@ -5,14 +9,16 @@ class generateButterfly {
         skill2      : number
         skill3      : number
         idmin       : number 
+        db          : checkDataBase
         
        
         constructor() {
-            this.idButterfly = null;
-            this.skill1 = null;
-            this.skill2 = null;
-            this.skill3 = null;
-            this.idmin = 1;      
+            this.db = new checkDataBase()
+            this.idButterfly = null
+            this.skill1 = null
+            this.skill2 = null
+            this.skill3 = null
+            this.idmin = 1      
         }
         
         // renvois un id aléatoire existant en base 
@@ -20,7 +26,7 @@ class generateButterfly {
             //rendom nombre
             this.idButterfly = Math.floor(Math.random()*(idmax-this.idmin)+this.idmin)
             //si id existe pas retry random id
-            while (this.checkIdDB(this.idButterfly, "Butterfly") == false){
+            while (this.db.checkIdDB(this.idButterfly, "Butterfly") == false){
             this.idButterfly = Math.floor(Math.random()*(idmax-this.idmin)+this.idmin)
             }
             return this.idButterfly                          
@@ -30,7 +36,7 @@ class generateButterfly {
         private SelectSkill(idmax :number) : number {
             let skill : number
             skill =  Math.floor(Math.random()*(idmax-this.idmin)+this.idmin)
-            while (this.checkIdDB(skill, "Attack") == false){
+            while (this.db.checkIdDB(skill, "Attack") == false){
                 skill = Math.floor(Math.random()*(idmax-this.idmin)+this.idmin)
                 }
                 return skill 
@@ -63,7 +69,7 @@ class generateButterfly {
             return JSON.stringify(dataButterfly)
 
         }
-
+        /*
         // check le nombre d'id max d'une table
         private checkIdMaxDB (id : number, table : string): boolean{
 
@@ -79,5 +85,5 @@ class generateButterfly {
             //temp
             return true
 
-        }
+        }*/
     }
