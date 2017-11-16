@@ -3,12 +3,15 @@ import mocks from './../mocks/mocks'
 
 class BattleLogProvider {
 
-  static getAllLog() {
+  battleLog;
+
+  getAllLog() {
     // TODO: Requete de recup des logs de combat de la room en cours
-    return mocks.battleLog;
+    this.battleLog = mocks.battleLog;
+    return this.battleLog;
   }
 
-  static sendLog(BattleLog, roomId) {
+  sendLog(BattleLog, roomId) {
     // TODO: Requete d'envoi d'une ligne de log
   }
 }

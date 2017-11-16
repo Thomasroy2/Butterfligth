@@ -1,0 +1,16 @@
+.figth-room {
+    display: flex;
+    height: 100vh;
+    .player-interface-div {
+        width: 35%;
+        background-color: pink;
+    }
+    .battle-log-div {
+        width: 40%;
+        background-color: yellow;
+    }
+    .enemy-interface-div {
+        width: 25%;
+        background-color: turquoise;
+    }
+}

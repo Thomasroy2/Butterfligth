@@ -1,21 +1,56 @@
 import React, { Component } from 'react';
-import logo from './../assets/icon/logo.svg';
-import BattleLog from './../components/battleLog/battleLog';
+import FigthRoom from './../view/figthRoom/figthRoom';
 import './App.css';
 
+const URL_CHOOSE_ATTACK = 'localhost:3001/butterfly/attack/choose/';
+
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+
+  /**
+    * Notify API that an attack has been choosed
+    */
+  handleAttackChoosed(attackId) {
+        fetch(URL_CHOOSE_ATTACK + attackId)
+          .then(res => res.json())
+          .then(data => {
+            if(data === 'success') {
+              this.handleSuccess();
+            } else
+              this.handleFailure();
+          })
+          .catch(e => console.error(e))
+  }
+
+
+
   render() {
+
+    let attack1 = {
+      'name' : 'Coup de patte',
+      'base_damage' : 80,
+      'priority': 80,
+    };
+    let attack2 = {
+      'name' : 'Battement d\'aile',
+      'base_damage' : 40,
+      'priority': 40,
+    };
+    let butterfly = {
+      'hp' : 100,
+      'name': 'Papillon de nuit',
+      'attacks' : [attack1, attack2],
+    }
+    console.log('Butterfly', butterfly);
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div className="battle-log-div">
-          <BattleLog />
+        <div className="figth-view-div">
+          <FigthRoom />
         </div>
       </div>
     );
