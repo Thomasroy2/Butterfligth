@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RoomProvider from './../../providers/room.provider';
 import BattleLog from './../../components/battleLog/battleLog';
 import EnemyInterface from './../../components/enemyInterface/enemyInterface';
-// import PlayerInterface from './../../components/playerInterface/playerInterface';
+import PlayerInterface from './../../components/fightInterface/playerInterface';
 import './figthRoom.css';
 
 class FigthRoom extends Component {
@@ -19,7 +19,7 @@ class FigthRoom extends Component {
     return (
       <div className="figth-room">
         <div className="player-interface-div">
-          {/* <PlayerInterface playerInfos={this.state.roomInfos.player} /> */}
+          <PlayerInterface />
         </div>
         <div className="battle-log-div">
           <BattleLog />
