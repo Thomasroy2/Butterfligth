@@ -19,7 +19,7 @@ class FigthRoom extends Component {
     return (
       <div className="figth-room">
         <div className="player-interface-div">
-          <PlayerInterface />
+          <PlayerInterface joueurInfos={this.state.roomInfos.player} />
         </div>
         <div className="battle-log-div">
           <BattleLog />
