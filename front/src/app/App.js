@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
-import logo from './../assets/icon/logo.svg';
-import BattleLog from './../components/battleLog/battleLog';
+import FigthRoom from './../view/figthRoom/figthRoom';
 import './App.css';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div className="battle-log-div">
-          <BattleLog />
+        <div className="figth-view-div">
+          <FigthRoom />
         </div>
       </div>
     );

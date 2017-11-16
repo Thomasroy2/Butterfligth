@@ -4,16 +4,17 @@ import BattleLogProvider from './../../providers/battleLog.provider'
 
 class BattleLog extends Component {
 
+  battleLogProvider = new BattleLogProvider();
   constructor(props) {
     super(props);
     this.state = {
-      battleLogs: BattleLogProvider.getAllLog(),
+      battleLogs: this.battleLogProvider.getAllLog(),
     }
   }
 
   render() {
     return (
-      <div>
+      <div className="battle-log-component">
         <h2>
           Logs de combat
         </h2>
