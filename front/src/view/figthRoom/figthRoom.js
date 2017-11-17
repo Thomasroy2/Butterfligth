@@ -10,8 +10,9 @@ class FigthRoom extends Component {
   roomProvider = new RoomProvider();
   constructor(props) {
     super(props);
+    this.roomProvider.getRoom();
     this.state = {
-      roomInfos: this.roomProvider.getRoom()
+      roomInfos: this.roomProvider.room
     }
   }
 
