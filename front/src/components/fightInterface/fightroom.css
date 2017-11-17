@@ -1,0 +1,14 @@
+.barreVie
+{
+    background-color:red;
+    width:200px;
+    height: 10px;
+    display: flex;
+}
+.barreVie2
+{
+    position: relative;
+    background-color:green;
+    height: 10px;
+    left:0;
+}
