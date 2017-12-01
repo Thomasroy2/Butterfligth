@@ -45,7 +45,6 @@ class App extends Component {
       'name': 'Papillon de nuit',
       'attacks' : [attack1, attack2],
     }
-    console.log('Butterfly', butterfly);
 
     return (
       <div className="App">

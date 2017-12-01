@@ -10,8 +10,9 @@ class FigthRoom extends Component {
   roomProvider = new RoomProvider();
   constructor(props) {
     super(props);
+    this.roomProvider.getRoom();
     this.state = {
-      roomInfos: this.roomProvider.getRoom()
+      roomInfos: this.roomProvider.room
     }
   }
 
@@ -19,7 +20,7 @@ class FigthRoom extends Component {
     return (
       <div className="figth-room">
         <div className="player-interface-div">
-          <PlayerInterface />
+          <PlayerInterface joueurInfos={this.state.roomInfos.player} />
         </div>
         <div className="battle-log-div">
           <BattleLog />

@@ -1,4 +1,5 @@
 import mocks from './../mocks/mocks'
+import ConnectorProvider from './connector.provider';
 
 
 class BattleLogProvider {
@@ -6,7 +7,17 @@ class BattleLogProvider {
   battleLog;
 
   getAllLog() {
-    // TODO: Requete de recup des logs de combat de la room en cours
+    ConnectorProvider.sendRequest(
+      'battleLog',
+      'GET',
+      {},
+      false,
+      ''
+    ).then(
+      (data) => {
+        console.log(data);
+      }
+    )
     this.battleLog = mocks.battleLog;
     return this.battleLog;
   }

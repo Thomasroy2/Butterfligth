@@ -12,20 +12,18 @@ class PlayerInterface extends Component {
     super(props);
 
     this.state = {
+      joueurInfos: props.joueurInfos,
       attacks:    [
         ['1', 'Coup de patte'],
         ['2', 'Battement d\'aile'],
         ['3', 'Charge'],
         ['4', 'Katana']
       ],
-      properties: [
-        'HP' : '100',
-        'MAX_HP' : '100',
-        'name' : 'Papillon de nuit',
+      properties: {
         'speed' : '40',
         'mortality' : '5',
         'luck': '55',
-      ],
+      },
       sendState: 'pending'
     }
   }
@@ -64,27 +62,37 @@ class PlayerInterface extends Component {
   }
 
   render() {
-    let properties = {};
-    properties["HP"]        = 100;
-    properties['maxHp']     = 100;
-    properties["name"]      = "Papillon de nuit";
-    properties["speed"]     = 40;
-    properties["mortality"] = 5;
-    properties["luck"]      = 55;
-
     let introText = this.handleIntroText();
 
     return (
         <div>
-          {properties['name']}
-          <div>{introText}</div>
+          <h2>
+              Joueur 1 
+          </h2>
+          <div>
+            {introText}
+          </div>
+          <p>
+            <strong>Nom  : </strong>
+            {this.state.joueurInfos.name}
+          </p>
+          <p>
+            <strong>image :  </strong>  
+            {this.state.joueurInfos.pic}
+            <img src={this.state.joueurInfos.pic}/>
+          </p>
           <div>
             <HpDetail
-              maxHp={properties['maxHp']}
-              currentHp={properties['HP']}/>
-            <ButterflyDetails properties={properties}/>
+              maxHp={this.state.joueurInfos.maxHp}
+              currentHp={this.state.joueurInfos.hp}
+            />
+            <ButterflyDetails 
+              speed={this.state.joueurInfos.speed}
+              mortality={this.state.joueurInfos.mortality}
+              luck={this.state.joueurInfos.luck}
+            />
           </div>
-          <div>
+        <div>
           {this.state.attacks.map((key) => {
 
             let buttonEnabled = 'enabled';

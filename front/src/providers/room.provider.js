@@ -1,25 +1,48 @@
-import mocks from './../mocks/mocks'
+import mocks from './../mocks/mocks';
+import ConnectorProvider from './connector.provider';
 
 
 class RoomProvider {
-    
-    room;
-    
-    getRoom() {
-        // TODO: Requete de recup des logs de combat de la room en cours
-        this.room = mocks.room;
-        return this.room;
-    }
-    
-    updateInfos(newRoomInfos) {
-        this.room = newRoomInfos;
-        return this.room;
-    }
-
-    leaveRoom() {
-        this.room = null;
-        // TODO: requete de leaveRoom
-    }
+  
+  room;
+  
+  getRoom() {
+    ConnectorProvider.sendRequest(
+      'butterfly',
+      'GET',
+      {},
+      false,
+      ''
+    ).then(
+      (data) => {
+        console.log(data);
+      }
+    )
+    this.room = mocks.room;
+    return this.room;
+  }
+  
+  updateInfos(newRoomInfos) {
+    this.room = newRoomInfos;
+    return this.room;
+  }
+  
+  leaveRoom() {
+    this.room = null;
+    ConnectorProvider.sendRequest(
+      'butterfly',
+      'DELETE',
+      {
+        roomId: this.room.id
+      },
+      false,
+      ''
+    ).then(
+      (data) => {
+        console.log(data);
+      }
+    )
+  }
 }
 
 export default RoomProvider;
