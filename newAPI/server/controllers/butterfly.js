@@ -52,8 +52,7 @@ module.exports = {
 },
 
 generate(req, res) {
-return butterfly
-
+butterflyData = butterfly
   .findById(getRandomInt(1,12), {
     attributes : ['id', 'name', 'catchphrase'],
   })
@@ -63,18 +62,25 @@ return butterfly
         message: 'Butterfly Not Found',
       });
     }
-
     const data = butterfly.toJSON()
 
     data.skills = [];
 
-    for(var i = 0; i < 3;i++)
-    {
-        data.skills[i] = selectSkill();
-    }
+    data.skills[0] = skill.findById(getRandomInt(1,15), {
+      attributes : ['id', 'name', 'effect'],
+    })
+      .then(data => console.log(data));
 
-    return res.status(200).send({Butterfly: data});
+    // for(var i = 0; i < 3;i++)
+    // {
+    //     data.skills[i] = skill.findById(getRandomInt(1,15), {
+    //       attributes : ['id', 'name', 'effect'],
+    //     }).toJSON();
+    // }
+    console.log(data);
+    return data;
   })
+  .then(data => res.status(200).send(data))
   .catch(error => res.status(400).send(error));
 },
 
