@@ -7,7 +7,7 @@ console.log(Room);
 
 module.exports = {
 
-  create(req, res) {
+  create(req, res,butterfly) {
 
     console.log(req.body);
 
@@ -21,10 +21,8 @@ module.exports = {
 
     return Room
       .create({
-        butterfly1: req.body.butterfly1,
-        butterfly2: req.body.butterfly2,
-        life1: req.body.life1,
-        life1: req.body.life2,
+        butterfly1: butterfly,
+        life1: butterfly.hp,
       })
       .then(room => res.status(201).send(room))
       .catch(error => res.status(400).send(error));
