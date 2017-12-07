@@ -8,13 +8,17 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
+    name:{
+      type:DataTypes.STRING(50),
+      allowNull:false
+    },
     butterfly1: {
       type: DataTypes.INTEGER(11),
-      allowNull: false
+      allowNull: true
     },
     butterfly2: {
       type: DataTypes.INTEGER(11),
-      allowNull: false
+      allowNull: true
     },
     life1: {
       type: DataTypes.INTEGER(11),

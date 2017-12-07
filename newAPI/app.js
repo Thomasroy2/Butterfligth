@@ -1,12 +1,15 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var port = process.env.PORT || 3000;
+const roomControl = require('./server/controllers/room')
+const butterflyControl = require('./server/controllers/butterfly')
+// const chatControl= require('./controllers/chat')
 // Set up the express app
 const app = express();
 
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var port = process.env.PORT || 3000;
 // Log requests to the console.
 app.use(logger('dev'));
 
@@ -27,25 +30,38 @@ io.on('connection', function(socket)
   /**
    * Reception d'attaque et envoie de la notification au client.
    */
-  socket.on('attack', function(type){
-    io.emit('attack','attaque reçue');
-    /**
-     * Changer la valeur de la fonction pour l'attaque .
-    */
-    //io.emit(type.room,attackAction(type));
+  socket.on('attack', function(attackinfo,fn){
+
     //io.emit(type.room+'bet',attackAction(type));
   });
   /**
    * Rejoindre la salle
    */
-  socket.on('room',function(room){
-    if(room.combat==true)
+  socket.on('room',function(requestroom,fn){
+    if(requestroom.combat==true)
     {
-      socket.join(room);
+      if(!roomControl.checkIfAnyRoomWithoutTwoPeople)
+      {
+        const butterfly=butterflyControl.generate().data
+        const clientroom=roomControl.create(butterfly);
+        socket.join(clientroom.name);
+        const response={code:201,room:clientroom};
+        fn(response);
+      }
+      else
+      {
+        const clientroom=roomControl.findFirstBattleRoom;
+        socket.join(clientroom.name);
+        const response={code:202,room:clientroom};
+        fn(response);
+      }
     }
     else
     {
-      socket.join(room+'bet');
+      const clientroom=roomControl.joinABetRoom;
+      socket.join(clientroom.name);
+      const response={code:202,room:clientroom};
+      fn(response);
     }
   });
 
@@ -54,8 +70,24 @@ io.on('connection', function(socket)
  */
 
   socket.on('betchat',function(message){
+    if(chatControl.isInsult(message.msg))
+    {
+      chatControl.storeMessage(message.author,message.msg);
+      io.to(message.room).emit('newMessage',{
+        message:message.msg,
+        author:message.author
+      });
+    }
+    else
+    {
+      const punition="N'a pas insulté ses adversaires";
+      chatControl.storeMessage(message.author,punition);
+      io.to(message.room).emit('newMessage',{
+        message:punition,
+        author:message.author
+      });
+    }
 
-    io.emit(message.room,message.msg);
   });
 /**
  * Reception de paris.

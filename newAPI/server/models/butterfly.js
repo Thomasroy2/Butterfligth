@@ -48,11 +48,11 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    unique_passive: {
+    picture: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
       references: {
-        model: 'passive',
+        model: 'picture',
         key: 'id'
       }
     }

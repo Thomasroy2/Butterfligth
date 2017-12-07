@@ -4,7 +4,7 @@ import AttackButton from './attackButton';
 import ButterflyDetails from './butterflyDetails';
 import HpDetail from './hpDetail';
 
-const SEND_STATE = ['FAIL' : 'fail', 'SUCCESS' : 'success', 'PENDING' : 'pending']
+const SEND_STATE = {'FAIL' : 'fail', 'SUCCESS' : 'success', 'PENDING' : 'pending'}
 
 class PlayerInterface extends Component {
 
