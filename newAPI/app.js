@@ -54,7 +54,7 @@ io.on('connection', function(socket)
  */
 
   socket.on('betchat',function(message){
-    
+
     io.emit(message.room,message.msg);
   });
 /**
