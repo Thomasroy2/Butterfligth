@@ -1,9 +1,9 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const roomControl = require('./controllers/room')
-const butterflyControl = require('./controllers/butterfly')
-const chatControl= require('./controllers/chat')
+const roomControl = require('./server/controllers/room')
+const butterflyControl = require('./server/controllers/butterfly')
+// const chatControl= require('./controllers/chat')
 // Set up the express app
 const app = express();
 
@@ -30,12 +30,8 @@ io.on('connection', function(socket)
   /**
    * Reception d'attaque et envoie de la notification au client.
    */
-  socket.on('attack', function(type){
-    io.emit('attack','attaque reçue');
-    /**
-     * Changer la valeur de la fonction pour l'attaque .
-    */
-    //io.emit(type.room,attackAction(type));
+  socket.on('attack', function(attackinfo,fn){
+        
     //io.emit(type.room+'bet',attackAction(type));
   });
   /**
