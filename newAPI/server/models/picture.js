@@ -10,10 +10,6 @@ module.exports = function(sequelize, DataTypes) {
     path: {
       type: DataTypes.TEXT,
       allowNull: false
-    },
-    color: {
-      type: DataTypes.INTEGER(1),
-      allowNull: false
     }
   }, {
     tableName: 'picture'
