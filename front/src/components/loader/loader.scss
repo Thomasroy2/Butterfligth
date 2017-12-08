@@ -1,0 +1,18 @@
+.modal-content {
+    display: flex;
+    align-items: center;
+    p {
+        margin: 0;
+    }
+}
+
+$primary-color: #ef43d6;
+@import './../../../node_modules/loaders.css/src/animations/ball-pulse.scss';
+@import './../../../node_modules/loaders.css/src/animations/ball-pulse-rise.scss';
+
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+  display: block;
+}
