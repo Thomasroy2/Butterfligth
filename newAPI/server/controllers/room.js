@@ -5,10 +5,23 @@ const Room = require('../models').room;
 
 
 module.exports = {
-
+  createIo(butterfly) {
+    return Room
+    .create({
+      name:'YOLOOOOOOOOOOO',
+      butterfly1: butterfly.id,
+      life1: butterfly.hp,
+    })
+    .then(room => {
+      console.log('1',room);
+      return room;
+    })
+    .catch(error => {
+      return error;
+    });
+  },
   create(req, res, butterfly) {
 
-    console.log(req.body);
 
 
     // let bf1 = butterfly.findById(req.body.butterfly1, {

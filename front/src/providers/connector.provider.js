@@ -19,7 +19,7 @@ class connectorProvider {
       this.socket.emit(requestName, requestParams,
         (data) => {
           if (useLoader) {
-            LoaderProvider.setLoader(false, ''); 
+            LoaderProvider.setLoader(false, '');
           }
           resolve(data);
         }
