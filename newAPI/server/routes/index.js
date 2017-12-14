@@ -1,5 +1,6 @@
 const butterflyController = require('../controllers').butterfly;
 const roomController = require('../controllers').room;
+const fighterController = require('../controllers').fighter;
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -19,5 +20,7 @@ module.exports = (app) => {
    app.post('/api/room/:roomId/editLife1', roomController.editLife1);
 
    app.post('/api/room/:roomId/editLife2', roomController.editLife2);
+
+   app.get('/api/fighter/:fighterId', fighterController.retrieve2);
 
 };

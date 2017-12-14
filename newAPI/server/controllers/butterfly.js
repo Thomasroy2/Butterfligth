@@ -54,7 +54,7 @@ module.exports = {
 generate(req, res) {
 butterflyData = butterfly
   .findById(getRandomInt(1,12), {
-    attributes : ['id', 'name', 'catchphrase','hp','mortality','attack',''],
+    attributes : ['id', 'name', 'catchphrase','hp','mortality','attack'],
   })
   .then(butterfly => {
     if (!butterfly) {
