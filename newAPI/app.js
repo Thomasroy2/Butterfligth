@@ -1,3 +1,5 @@
+// import { setInterval } from 'timers';
+const setInterval = require('timers').setInterval;
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
@@ -9,7 +11,7 @@ const app = express();
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3001;
 // Log requests to the console.
 app.use(logger('dev'));
 
@@ -48,6 +50,13 @@ io.on('connection', function (socket) {
               (data) => {
                 socket.join(data.id);
                 const response = { code: 201, room: data };
+                socket.emit('new_message');
+                setInterval(
+                  () => {
+                    socket.emit('new_message');
+                  },
+                  5000
+                );
                 fn(response);
               }
             );

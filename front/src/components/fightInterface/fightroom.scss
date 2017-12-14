@@ -1,0 +1,51 @@
+.player-interface
+{
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    .player-information-div 
+    {
+        background-color: #ef43d6;
+        border-style: solid;
+        border-color: black;
+        border-radius: 15px;
+        padding: 10px;
+        margin: 0 10px;
+        flex: auto;
+        .barreVie
+        {
+            background-color:red;
+            width:200px;
+            height: 10px;
+            display: flex;
+        }
+        .barreVie2
+        {
+            position: relative;
+            background-color:green;
+            height: 10px;
+            left:0;
+        }
+        .taille
+        {
+            width: 200px;
+            height: 130px;
+        }
+        .player-bouton-div {
+            display: flex;
+            flex-flow: row wrap;
+            .button {
+                margin: 0 auto;
+                button
+                {
+                    color:white;
+                    border-color:grey;
+                    background-color:grey;
+                    height: 100px;
+                    min-width: 200px;
+                    margin-top:20px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+.spectator-interface-chat {
+    display: flex;
+    height: 70vh; }
+.spectator-interface-chat .vide-interface-div 
+{
+     width: 70%;
+}
+.spectator-interface-chat .chat-interface-div 
+{
+    width: 30%;
+    background-color: blue; 
+}
+
+.spectator-interface-bas 
+{
+    display: flex;
+    height: 30vh; 
+}
+.spectator-interface-bas .pari-interface-div 
+{
+    width: 100%;
+    background-color: black; 
+}

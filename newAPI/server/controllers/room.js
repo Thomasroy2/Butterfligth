@@ -17,7 +17,6 @@ module.exports = {
       life1: butterfly.hp,
     })
     .then(room => {
-      console.log('1',room);
       return room;
     })
     .catch(error => {

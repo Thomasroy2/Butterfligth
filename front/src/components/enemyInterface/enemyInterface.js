@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import HpDetail from './../fightInterface/hpDetail';
 import './enemyInterface.css';
-
 class EnemyInterface extends Component {
 
   constructor(props) {
@@ -12,25 +11,29 @@ class EnemyInterface extends Component {
   }
 
   render() {
+    let img = require('./../../assets/img/' + this.state.enemyInfos.pic)
     return (
-      <div className="enemy-infos-component">
-        <h2>
-          Joueur 2
-        </h2>
-        <p>
-          <strong>Nom </strong> :
-          {this.state.enemyInfos.name}
-        </p>
-        <p>
-          <strong> Image  :</strong>
-          <img src={this.state.enemyInfos.pic}/>
-        </p>
-        <p>
-          <HpDetail
-            maxHp={this.state.enemyInfos.maxHp}
-            currentHp={this.state.enemyInfos.hp}
-          />
-        </p>
+      <div className="enemy-interface">
+        <div className="enemy-image-div">
+          <p>
+            <img className="taille" src={img} alt="logo" />
+          </p>
+        </div>
+        <div className="enemy-infos-component">
+          <h2>
+            Joueur 2
+          </h2>
+          <p>
+            <strong>Nom </strong> :
+            {this.state.enemyInfos.name}
+          </p>
+          <p>
+            <HpDetail
+              maxHp={this.state.enemyInfos.maxHp}
+              currentHp={this.state.enemyInfos.hp}
+            />
+          </p>
+        </div>
       </div>
     );
   }

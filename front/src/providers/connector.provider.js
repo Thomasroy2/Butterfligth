@@ -9,6 +9,7 @@ class connectorProvider {
 
   setConnection() {
     this.socket = io(Settings.API_URL + ':' + Settings.API_PORT);
+    console.log('1?');
   }
 
   sendRequest(requestName, requestParams, useLoader, loaderMessage) {
@@ -24,6 +25,14 @@ class connectorProvider {
           resolve(data);
         }
       );
+    });
+  }
+
+  setWaitingForPlayer2Listener() {
+    // LoaderProvider.setLoader(true, 'En attente d\'un autre joueur')
+    this.socket.on('playerJoined', () => {
+      LoaderProvider.setLoader(false, 'En attente d\'un autre joueur')
+      this.socket.removeListener('playerJoined');
     });
   }
 }

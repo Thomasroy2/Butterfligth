@@ -1,3 +1,14 @@
-.enemy-infos-component {
-    
+.enemy-interface{
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    .enemy-infos-component{
+        background-color: #ef43d6;
+        border-style: solid;
+        border-color: black;
+        border-radius: 15px;
+        padding: 10px;
+        margin: 0 10px;
+        flex: auto;
+    }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './fightroom.css';
+
 class HpDetail extends React.Component {
 
   render() {
@@ -23,7 +23,6 @@ class HpDetail extends React.Component {
   }
 
   getHpPercent() {
-    console.log('ah');
     return (((this.props.currentHp / this.props.maxHp)*100) * 2)
   }
 }

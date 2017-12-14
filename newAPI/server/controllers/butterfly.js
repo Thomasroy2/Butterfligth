@@ -103,7 +103,6 @@ module.exports = {
         //       attributes : ['id', 'name', 'effect'],
         //     }).toJSON();
         // }
-        console.log(data);
         return data;
       })
       .then(data => res.status(200).send(data))

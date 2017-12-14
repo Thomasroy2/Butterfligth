@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import AttackButton from './attackButton';
 import ButterflyDetails from './butterflyDetails';
 import HpDetail from './hpDetail';
-
-const SEND_STATE = {'FAIL' : 'fail', 'SUCCESS' : 'success', 'PENDING' : 'pending'}
+import './fightroom.css';
 
 class PlayerInterface extends Component {
 
@@ -13,15 +12,15 @@ class PlayerInterface extends Component {
 
     this.state = {
       joueurInfos: props.joueurInfos,
-      attacks:    [
+      attacks: [
         ['1', 'Coup de patte'],
         ['2', 'Battement d\'aile'],
         ['3', 'Charge'],
         ['4', 'Katana']
       ],
       properties: {
-        'speed' : '40',
-        'mortality' : '5',
+        'speed': '40',
+        'mortality': '5',
         'luck': '55',
       },
       sendState: 'pending'
@@ -32,92 +31,38 @@ class PlayerInterface extends Component {
     this.props.onAttackChoosed(attackId);
   }
 
-  handleFailure() {
-    this.setState({
-      sendState: SEND_STATE['FAIL'],
-    });
-  }
-
-  handleSuccess() {
-    this.setState({
-      sendState: SEND_STATE['SUCCESS'],
-    })
-  }
-
-  handlePending() {
-    this.setState({
-      sendState: SEND_STATE['PENDING'],
-    })
-  }
-
-  handleIntroText() {
-    switch(this.state.sendState) {
-      case SEND_STATE['SUCCESS']:
-        return "En attente du jeu";
-      case SEND_STATE['FAIL']:
-        return "Erreur lors de l'attaque. Veuillez réessayer";
-      case SEND_STATE['PENDING']:
-        return "C'est votre tour";
-    }
-  }
-
   render() {
-    let introText = this.handleIntroText();
-
+    let img = require('./../../assets/img/' + this.state.joueurInfos.pic);
+    console.log(img);
     return (
-        <div>
+      <div className="player-interface">
+        <div className="player-image-div">
+          <p>
+            <img className="taille" src={img} alt="logo" />
+          </p>
+        </div>
+        <div className="player-information-div">
           <h2>
-              Joueur 1 
+            Joueur 1
           </h2>
-          <div>
-            {introText}
-          </div>
           <p>
             <strong>Nom  : </strong>
             {this.state.joueurInfos.name}
           </p>
-          <p>
-            <strong>image :  </strong>  
-            {this.state.joueurInfos.pic}
-            <img src={this.state.joueurInfos.pic}/>
-          </p>
-          <div>
-            <HpDetail
-              maxHp={this.state.joueurInfos.maxHp}
-              currentHp={this.state.joueurInfos.hp}
-            />
-            <ButterflyDetails 
-              speed={this.state.joueurInfos.speed}
-              mortality={this.state.joueurInfos.mortality}
-              luck={this.state.joueurInfos.luck}
-            />
-          </div>
-        <div>
-          {this.state.attacks.map((key) => {
-
-            let buttonEnabled = 'enabled';
-            if(this.state.sendState === 'success') {
-              buttonEnabled = 'disabled';
-            } else {
-              buttonEnabled = 'enabled';
-            }
-
-            return (
-                <AttackButton
-                  label={key[1]}
-                  attackId={key[0]}
-                  key={key[0]}
-                  onClick={this.handleClick}
-                  enabled={buttonEnabled}
-                   />
-                )
-            })}
-
-          </div>
+          <HpDetail
+            maxHp={this.state.joueurInfos.maxHp}
+            currentHp={this.state.joueurInfos.hp}
+          />
+          <ButterflyDetails
+            speed={this.state.joueurInfos.speed}
+            mortality={this.state.joueurInfos.mortality}
+            luck={this.state.joueurInfos.luck}
+          />
+          
         </div>
+      </div>
     );
   }
-
 }
 
 export default PlayerInterface;
