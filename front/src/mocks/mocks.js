@@ -48,7 +48,7 @@ module.exports = {
             id: 1,
             name: 'JEAN CLAUDE VAN FLY',
             catchphrase: 'Quand tu fais le calcul, je suis mon meilleur modèle car il faut se recréer... pour recréer... a better you et ça, c\'est très dur, et, et, et... c\'est très facile en même temps. Ça respire le meuble de Provence, hein ?',
-            hp: 56,
+            hp: 80,
             maxHp: 100,
             attack: 10,
             defense: 10,
@@ -75,7 +75,7 @@ module.exports = {
             name: 'Le Greviste',
             catchphrase: 'Quand tu fais le calcul, je suis mon meilleur modèle car il faut se recréer... pour recréer... a better you et ça, c\'est très dur, et, et, et... c\'est très facile en même temps. Ça respire le meuble de Provence, hein ?',
             pic: 'image4.png',
-            hp: 60,
+            hp: 50,
             maxHp: 100
         }
     },
