@@ -1,31 +1,31 @@
 import Settings from './../settings/settings';
+import io from 'socket.io-client';
+import LoaderProvider from './loader.provider';
+import { setInterval } from 'timers';
 
 class connectorProvider {
 
-    static sendRequest(requestName, requestMethod, requestParams, useLoader, loaderMessage) {
-        let apiFullUrl = Settings.API_URL + ':' + Settings.API_PORT + '/' + Settings.API_SUB_URL + '/' + requestName;
-        return fetch(
-            apiFullUrl,
-            {
-                method: requestMethod,
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: (requestMethod !== 'GET') ? requestParams : null
-            }
-        ).then(res => {
-            if (res.status !== 200) {
-                Promise.reject(res);
-            }
-            return res.json();
-        }).then(data => {
-            return Promise.resolve(data);
-        }).catch(e => {
-            console.error(e);
-            return Promise.reject(e);
-        })
-    }
+  socket;
+
+  setConnection() {
+    this.socket = io(Settings.API_URL + ':' + Settings.API_PORT);
+  }
+
+  sendRequest(requestName, requestParams, useLoader, loaderMessage) {
+    return new Promise((resolve, reject) => {
+      if (useLoader) {
+        LoaderProvider.setLoader(useLoader, loaderMessage);
+      }
+      this.socket.emit(requestName, requestParams,
+        (data) => {
+          if (useLoader) {
+            LoaderProvider.setLoader(false, '');
+          }
+          resolve(data);
+        }
+      );
+    });
+  }
 }
 
 export default connectorProvider;

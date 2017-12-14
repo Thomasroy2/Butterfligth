@@ -17,10 +17,10 @@ module.exports = (app) => {
 
    app.post('/api/room/:roomId/bet', roomController.newBet);
 
-   app.post('/api/room/:roomId/editLife1', roomController.editLife1);
+   app.post('/api/fighter/new', fighterController.generate);
 
-   app.post('/api/room/:roomId/editLife2', roomController.editLife2);
+   app.post('/api/room/attack', roomController.attack);
 
-   app.get('/api/fighter/:fighterId', fighterController.retrieve2);
+   app.get('/api/fighter/:fighterId', fighterController.retrieveIo);
 
 };

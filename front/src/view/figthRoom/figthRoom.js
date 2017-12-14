@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import RoomProvider from './../../providers/room.provider';
 import BattleLog from './../../components/battleLog/battleLog';
 import EnemyInterface from './../../components/enemyInterface/enemyInterface';
 import PlayerInterface from './../../components/fightInterface/playerInterface';
@@ -7,12 +6,11 @@ import './figthRoom.css';
 
 class FigthRoom extends Component {
 
-  roomProvider = new RoomProvider();
+  roomProvider = require('./../../providers/room.provider');
   constructor(props) {
     super(props);
-    this.roomProvider.getRoom();
     this.state = {
-      roomInfos: this.roomProvider.room
+      roomInfos: this.roomProvider.default.prototype.room
     }
   }
 

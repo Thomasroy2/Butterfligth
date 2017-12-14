@@ -5,15 +5,21 @@ import ConnectorProvider from './connector.provider';
 class RoomProvider {
   
   room;
+  constructor() {
+    
+  }
   
   getRoom() {
-    ConnectorProvider.sendRequest(
-      'butterfly',
-      'GET',
-      {},
-      false,
-      ''
-    ).then(
+    let connector = require('./../providers/connector.provider');
+    connector.default.prototype.sendRequest(
+      'room',
+      {
+        combat: true
+      },
+      true,
+      'Recherche d\'une salle de combat'
+    )
+    .then(
       (data) => {
         console.log(data);
       }

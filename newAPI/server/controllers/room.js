@@ -1,14 +1,31 @@
 const butterfly = require('../models').butterfly;
 const skill = require('../models').skill;
 const Room = require('../models').room;
+const fighter = require('../models').fighter;
+
+const fighterController = require('./fighter');
+const roomController = require('./room');
 
 
 
 module.exports = {
-
+  createIo(butterfly) {
+    return Room
+    .create({
+      name:'YOLOOOOOOOOOOO',
+      butterfly1: butterfly.id,
+      life1: butterfly.hp,
+    })
+    .then(room => {
+      console.log('1',room);
+      return room;
+    })
+    .catch(error => {
+      return error;
+    });
+  },
   create(req, res, butterfly) {
 
-    console.log(req.body);
 
 
     // let bf1 = butterfly.findById(req.body.butterfly1, {
@@ -36,50 +53,100 @@ module.exports = {
             message: 'Room Not Found',
           });
         }
-        return res.status(200).send(room);
+        let data = room.toJSON()
+
+        return fighterController.retrieveIo(data.butterfly1)
+          .then(fighter1 => {
+            data.butterfly1 = fighter1;
+            return fighterController.retrieveIo(data.butterfly2)
+              .then(fighter2 => {
+                data.butterfly2 = fighter2;
+                return data;
+              })
+          })
       })
-      .catch(error => res.status(400).send(error));
+      .then(data => {
+        return res.status(200).send(data);
+      });
   },
 
-  editLife1(req, res) {
+  retrieveIo(roomId) {
     return Room
-      .findById(req.params.roomId)
+      .findById(roomId)
       .then(room => {
         if (!room) {
           return res.status(404).send({
             message: 'Room Not Found',
           });
         }
-        let newLife1 = room.life1 + req.body.lifeModifier;
-        return room
-          .update({
-            life1: newLife1,
+        let data = room.toJSON()
+
+        return fighterController.retrieveIo(data.butterfly1)
+          .then(fighter1 => {
+            data.butterfly1 = fighter1;
+            return fighterController.retrieveIo(data.butterfly2)
+              .then(fighter2 => {
+                data.butterfly2 = fighter2;
+                return data;
+              })
           })
-          .then(() => res.status(200).send(room))  // Send back the updated room.
-          .catch((error) => res.status(400).send(error));
       })
-      .catch((error) => res.status(400).send(error));
+      .then(data => {
+        return data;
+      });
   },
 
-  editLife2(req, res) {
+
+  attack(req, res) {
     return Room
-      .findById(req.params.roomId)
+      .findById(req.body.roomId)
       .then(room => {
         if (!room) {
           return res.status(404).send({
             message: 'Room Not Found',
           });
         }
-        let newLife2 = room.life2 + req.body.lifeModifier;
-        return room
-          .update({
-            life2: newLife2,
+        if (req.body.attackerId != room.butterfly1 && req.body.attackerId != room.butterfly2) {
+          return res.status(404).send({
+            message: 'Invalid attacker',
+          });
+        }
+
+        if (req.body.targetId != room.butterfly1 && req.body.targetId != room.butterfly2) {
+          return res.status(404).send({
+            message: 'Invalid target',
+          });
+        }
+        return skill
+            .findById(req.body.skillId, {
+                attributes: ['id', 'name', 'base_attack', 'effect'],
           })
-          .then(() => res.status(200).send(room))  // Send back the updated room.
-          .catch((error) => res.status(400).send(error));
+          .then(skill => {
+              return fighter
+                .findById(req.body.targetId)
+                .then(fighter => {
+                  let newlife = fighter.hp - skill.base_attack
+                  return fighter
+                  .update({
+                    hp: newlife || fighter.hp,
+                })
+                .then(fighter => {
+                    return module.exports.retrieveIo(req.body.roomId)
+                    .then(room => {
+                      let data = room
+                      data.battleLog = skill.effect
+                      return data
+                    })
+                })
+          })
+        })
       })
-      .catch((error) => res.status(400).send(error));
+      .then(data => {
+        return res.status(200).send(data);
+      });
   },
+
+
 
 
   newBet(req, res) {

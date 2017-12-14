@@ -24,6 +24,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
+    createdAt: {
+            allowNull: false,
+            type: DataTypes.DATE,
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE,
+    },
   }, {
     tableName: 'fighter'
   });

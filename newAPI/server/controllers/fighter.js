@@ -27,20 +27,144 @@ function selectSkill(req, res)
 
 module.exports = {
 
-retrieve2(req, res) {
-  return fighter
-    .findById(req.params.fighterId, {
-      attributes : ['id', 'butterflyId', 'hp'],
-    })
-    .then(fighter => {
-      if (!fighter) {
-        return res.status(404).send({
-          message: 'fighter Not Found',
-        });
-      }
-      return res.status(200).send(fighter);
-    })
-    .catch(error => res.status(400).send(error));
-},
+  generateIo() {
+
+    return fighter
+      .create({
+        butterflyId: getRandomInt(1, 12),
+        skill1: getRandomInt(1, 15),
+        skill2: getRandomInt(1, 15)
+      })
+      .then(fighter => {
+
+        if (!fighter) {
+          return res.status(404).send({
+            message: 'Error while creating',
+          });
+        }
+        let data = fighter.toJSON()
+        console.log(data)
+        return butterfly.findById(data.butterflyId, {
+            attributes: ['id', 'name', 'catchphrase', 'hp', 'mortality', 'attack'],
+          })
+          .then(butterfly => {
+            data.butterfly = butterfly.dataValues
+
+            return fighter
+            .update({
+              hp: data.butterfly.hp || fighter.hp,
+            })
+              .then(fighter => {
+                return skill.findById(data.skill1, {
+                    attributes: ['id', 'name', 'effect'],
+                  })
+                  .then(skill1 => {
+                    data.skill1 = skill1.dataValues
+
+                    return skill.findById(data.skill2, {
+                        attributes: ['id', 'name', 'effect'],
+                      })
+                      .then(skill => {
+                        data.skill2 = skill.dataValues
+                        return data;
+                      })
+                    })
+                  })
+                })
+              })
+              .then(data => {
+                return data;
+              });
+  },
+
+  retrieveIo(fighterId) {
+
+    return fighter
+      .findById(fighterId)
+      .then(fighter => {
+
+        if (!fighter) {
+          return res.status(404).send({
+            message: '404 Fighter not Found',
+          });
+        }
+        let data = fighter.toJSON()
+        console.log(data)
+        return butterfly.findById(data.butterflyId, {
+            attributes: ['id', 'name', 'catchphrase', 'hp', 'mortality', 'attack'],
+          })
+          .then(butterfly => {
+            data.butterfly = butterfly.dataValues
+
+                return skill.findById(data.skill1, {
+                    attributes: ['id', 'name', 'effect'],
+                  })
+                  .then(skill1 => {
+                    data.skill1 = skill1.dataValues
+
+                    return skill.findById(data.skill2, {
+                        attributes: ['id', 'name', 'effect'],
+                      })
+                      .then(skill => {
+                        data.skill2 = skill.dataValues
+                        return data;
+                      })
+                    })
+                  })
+                })
+              .then(data => {
+                return data;
+              });
+  },
+
+  generate(req, res) {
+
+    return fighter
+      .create({
+        butterflyId: getRandomInt(1, 12),
+        skill1: getRandomInt(1, 15),
+        skill2: getRandomInt(1, 15)
+      })
+      .then(fighter => {
+
+        if (!fighter) {
+          return res.status(404).send({
+            message: 'Error while creating',
+          });
+        }
+        let data = fighter.toJSON()
+        console.log(data)
+        return butterfly.findById(data.butterflyId, {
+            attributes: ['id', 'name', 'catchphrase', 'hp', 'mortality', 'attack'],
+          })
+          .then(butterfly => {
+            data.butterfly = butterfly.dataValues
+
+            return fighter
+            .update({
+              hp: data.butterfly.hp || fighter.hp,
+            })
+              .then(fighter => {
+                return skill.findById(data.skill1, {
+                    attributes: ['id', 'name', 'effect'],
+                  })
+                  .then(skill1 => {
+                    data.skill1 = skill1.dataValues
+
+                    return skill.findById(data.skill2, {
+                        attributes: ['id', 'name', 'effect'],
+                      })
+                      .then(skill => {
+                        data.skill2 = skill.dataValues
+                        return data;
+                      })
+                    })
+                  })
+                })
+              })
+              .then(data => {
+                return res.status(200).send(data);
+              });
+  },
 
 };

@@ -7,12 +7,12 @@ class BattleLogProvider {
   battleLog;
 
   getAllLog() {
-    ConnectorProvider.sendRequest(
+    let connector = require('./../providers/connector.provider');
+    connector.default.prototype.sendRequest(
       'battleLog',
-      'GET',
       {},
-      false,
-      ''
+      true,
+      'Chargement des logs'
     ).then(
       (data) => {
         console.log(data);
@@ -20,10 +20,6 @@ class BattleLogProvider {
     )
     this.battleLog = mocks.battleLog;
     return this.battleLog;
-  }
-
-  sendLog(BattleLog, roomId) {
-    // TODO: Requete d'envoi d'une ligne de log
   }
 }
 
