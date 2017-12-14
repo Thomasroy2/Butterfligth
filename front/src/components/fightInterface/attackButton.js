@@ -21,7 +21,7 @@ class AttackButton extends Component {
 
   render() {
     return (
-      <div className="col-lg-6 button">
+      <div className="button">
         <button
           id={this.state.attackId}
           onClick={this.handleClick}

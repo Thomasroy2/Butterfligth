@@ -60,15 +60,14 @@ class App extends Component {
     return (
       <div className="App">
         <LoaderComponent />
-        <div className="figth-view-div">
-          <FigthRoom />
-        </div>
+        <Router>
           <div>
             <Route path='/fightroom' exact component={FigthRoom} />
             <Route path='/' exact component={Login} />
             <Route path='/spectator' exact component={Spectator} />
           </div>
-        </Router>      </div>
+        </Router>
+      </div>
     );
   }
 }

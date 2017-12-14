@@ -16,7 +16,7 @@ class RoomProvider {
       {
         combat: true
       },
-      true,
+      false,
       'Recherche d\'une salle de combat'
     )
     .then(

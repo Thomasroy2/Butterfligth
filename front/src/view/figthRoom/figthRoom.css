@@ -2,15 +2,14 @@
   display: flex;
   height: calc(100vh - 20px);
   padding: 10px 0; }
-  .figth-room .battle-log-div, .figth-room .enemy-interface-div, .figth-room .player-interface-div {
+  .figth-room .battle-log-div {
     padding: 10px;
     margin: 0 10px;
     border-style: solid;
     border-color: black;
     border-radius: 15px; }
-  .figth-room .enemy-interface-div, .figth-room .player-interface-div {
-    margin-top: 25vh;
-    background-color: #ef43d6; }
+  .figth-room .player-interface-div {
+    margin: 0 10px; }
   .figth-room .player-interface-div {
     width: 35%; }
   .figth-room .battle-log-div {

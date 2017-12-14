@@ -1,5 +1,5 @@
 import React from 'react';
-import './fightroom.css';
+
 class HpDetail extends React.Component {
 
   render() {

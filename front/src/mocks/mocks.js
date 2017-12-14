@@ -56,7 +56,7 @@ module.exports = {
             speed: 10,
             mortality: 0.1,
             unique_skill: 1,
-            pic: 'image4.png',
+            pic: 'image2.png',
             attacks: [{
                 id: 1,
             },
@@ -74,7 +74,7 @@ module.exports = {
             id: 2,
             name: 'Le Greviste',
             catchphrase: 'Quand tu fais le calcul, je suis mon meilleur modèle car il faut se recréer... pour recréer... a better you et ça, c\'est très dur, et, et, et... c\'est très facile en même temps. Ça respire le meuble de Provence, hein ?',
-            pic: 'image3.2.png',
+            pic: 'image4.png',
             hp: 60,
             maxHp: 100
         }
