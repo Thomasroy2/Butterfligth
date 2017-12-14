@@ -1,12 +1,20 @@
 .figth-room {
   display: flex;
-  height: 100vh; }
+  height: calc(100vh - 20px);
+  padding: 10px 0; }
+  .figth-room .battle-log-div, .figth-room .enemy-interface-div, .figth-room .player-interface-div {
+    padding: 10px;
+    margin: 0 10px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 15px; }
+  .figth-room .enemy-interface-div, .figth-room .player-interface-div {
+    margin-top: 25vh;
+    background-color: #ef43d6; }
   .figth-room .player-interface-div {
-    width: 35%;
-    background-color: pink; }
+    width: 35%; }
   .figth-room .battle-log-div {
     width: 40%;
-    background-color: yellow; }
+    background-color: lightsteelblue; }
   .figth-room .enemy-interface-div {
-    width: 25%;
-    background-color: turquoise; }
+    width: 25%; }

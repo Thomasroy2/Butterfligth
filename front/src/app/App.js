@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FigthRoom from './../view/figthRoom/figthRoom';
+import LoaderComponent from './../containers/loader';
 import Login from './../view/authentification/loginPage';
 import Spectator from './../view/spectator/spectatorView';
 import './App.css';
@@ -11,6 +12,15 @@ import {
 const URL_CHOOSE_ATTACK = 'localhost:3001/butterfly/attack/choose/';
 
 class App extends Component {
+
+  roomProvider = require('./../providers/room.provider');
+  connector = require('./../providers/connector.provider');
+  constructor(props) {
+    super(props);
+    this.connector.default.prototype.setConnection();
+    console.log(this.roomProvider.default.prototype.getRoom());
+  }
+
 
   /**
     * Notify API that an attack has been choosed
@@ -46,18 +56,19 @@ class App extends Component {
       'name': 'Papillon de nuit',
       'attacks': [attack1, attack2],
     }
-    console.log('Butterfly', butterfly);
 
     return (
       <div className="App">
-        <Router>
+        <LoaderComponent />
+        <div className="figth-view-div">
+          <FigthRoom />
+        </div>
           <div>
             <Route path='/fightroom' exact component={FigthRoom} />
             <Route path='/' exact component={Login} />
             <Route path='/spectator' exact component={Spectator} />
           </div>
-        </Router>
-      </div>
+        </Router>      </div>
     );
   }
 }
