@@ -4,15 +4,13 @@ import AttackButton from './attackButton';
 import ButterflyDetails from './butterflyDetails';
 import HpDetail from './hpDetail';
 
-const SEND_STATE = ['FAIL' : 'fail', 'SUCCESS' : 'success', 'PENDING' : 'pending']
-
 class PlayerInterface extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      joueurInfos: props.joueurInfos,
+      joueurInfos: props.joueurInfos, 
       attacks:    [
         ['1', 'Coup de patte'],
         ['2', 'Battement d\'aile'],
@@ -31,55 +29,21 @@ class PlayerInterface extends Component {
   handleClick = (attackId) => {
     this.props.onAttackChoosed(attackId);
   }
-
-  handleFailure() {
-    this.setState({
-      sendState: SEND_STATE['FAIL'],
-    });
-  }
-
-  handleSuccess() {
-    this.setState({
-      sendState: SEND_STATE['SUCCESS'],
-    })
-  }
-
-  handlePending() {
-    this.setState({
-      sendState: SEND_STATE['PENDING'],
-    })
-  }
-
-  handleIntroText() {
-    switch(this.state.sendState) {
-      case SEND_STATE['SUCCESS']:
-        return "En attente du jeu";
-      case SEND_STATE['FAIL']:
-        return "Erreur lors de l'attaque. Veuillez réessayer";
-      case SEND_STATE['PENDING']:
-        return "C'est votre tour";
-    }
-  }
-
+  
   render() {
-    let introText = this.handleIntroText();
-
+    let img = require('./../../assets/img/' + this.state.joueurInfos.pic)
     return (
         <div>
           <h2>
               Joueur 1 
           </h2>
-          <div>
-            {introText}
-          </div>
           <p>
             <strong>Nom  : </strong>
             {this.state.joueurInfos.name}
           </p>
           <p>
-            <strong>image :  </strong>  
-            {this.state.joueurInfos.pic}
-            <img src={this.state.joueurInfos.pic}/>
+            <strong>image :  </strong> <br />
+            <img className="taille" src={img} alt="logo" />
           </p>
           <div>
             <HpDetail
@@ -92,28 +56,27 @@ class PlayerInterface extends Component {
               luck={this.state.joueurInfos.luck}
             />
           </div>
-        <div>
-          {this.state.attacks.map((key) => {
-
+          <div>
+            {this.state.attacks.map((key) => 
+            {
             let buttonEnabled = 'enabled';
-            if(this.state.sendState === 'success') {
+            if(this.state.sendState === 'success') 
+            {
               buttonEnabled = 'disabled';
             } else {
               buttonEnabled = 'enabled';
             }
-
             return (
-                <AttackButton
-                  label={key[1]}
-                  attackId={key[0]}
-                  key={key[0]}
-                  onClick={this.handleClick}
-                  enabled={buttonEnabled}
-                   />
+                  <AttackButton
+                    label={key[1]}
+                    attackId={key[0]}
+                    key={key[0]}
+                    onClick={this.handleClick}
+                    enabled={buttonEnabled}
+                  />
                 )
             })}
-
-          </div>
+        </div>
         </div>
     );
   }

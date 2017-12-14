@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import SingleDetail from './singleDetail';
 
 class ButterflyDetails extends Component {
   render() {

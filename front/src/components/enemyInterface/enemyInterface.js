@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import HpDetail from './../fightInterface/hpDetail';
 import './enemyInterface.css';
-
 class EnemyInterface extends Component {
 
   constructor(props) {
@@ -12,6 +11,7 @@ class EnemyInterface extends Component {
   }
 
   render() {
+    let img = require('./../../assets/img/' + this.state.enemyInfos.pic)
     return (
       <div className="enemy-infos-component">
         <h2>
@@ -22,8 +22,8 @@ class EnemyInterface extends Component {
           {this.state.enemyInfos.name}
         </p>
         <p>
-          <strong> Image  :</strong>
-          <img src={this.state.enemyInfos.pic}/>
+          <strong> Image  :</strong><br />
+          <img className="taille" src={img} alt="logo" />
         </p>
         <p>
           <HpDetail

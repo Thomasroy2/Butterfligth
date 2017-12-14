@@ -12,3 +12,18 @@
     height: 10px;
     left:0;
 }
+.taille
+{
+    width: 200px;
+    height: 130px;
+}
+
+.button button
+{
+    color:white;
+    border-color:grey;
+    background-color:grey;
+    height: 100px;
+    min-width: 200px;
+    margin-top:20px;
+}
