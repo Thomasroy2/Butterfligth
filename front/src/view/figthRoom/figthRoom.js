@@ -12,6 +12,7 @@ class FigthRoom extends Component {
     this.state = {
       roomInfos: this.roomProvider.default.prototype.room
     }
+    console.log(this.state.roomInfos);
   }
 
   render() {

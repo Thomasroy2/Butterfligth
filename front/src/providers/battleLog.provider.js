@@ -15,7 +15,7 @@ class BattleLogProvider {
       'Chargement des logs'
     ).then(
       (data) => {
-        console.log(data);
+        
       }
     )
     this.battleLog = mocks.battleLog;

@@ -32,7 +32,8 @@ class PlayerInterface extends Component {
   }
 
   render() {
-    let img = require('./../../assets/img/' + this.state.joueurInfos.pic)
+    let img = require('./../../assets/img/' + this.state.joueurInfos.pic);
+    console.log(img);
     return (
       <div className="player-interface">
         <div className="player-image-div">

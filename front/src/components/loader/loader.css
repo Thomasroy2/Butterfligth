@@ -1,8 +1,9 @@
 .modal-content {
   display: flex;
-  align-items: center; }
+  align-items: center;
+  align-content: center; }
   .modal-content p {
-    margin: 0; }
+    margin: 15px; }
 
 @keyframes scale {
   0% {

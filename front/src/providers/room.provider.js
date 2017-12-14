@@ -1,14 +1,14 @@
 import mocks from './../mocks/mocks';
 import ConnectorProvider from './connector.provider';
-
+import LoaderProvider from './loader.provider';
 
 class RoomProvider {
-  
+
   room;
   constructor() {
-    
   }
-  
+
+
   getRoom() {
     let connector = require('./../providers/connector.provider');
     connector.default.prototype.sendRequest(
@@ -19,25 +19,27 @@ class RoomProvider {
       false,
       'Recherche d\'une salle de combat'
     )
-    .then(
+      .then(
       (data) => {
+        if (data.code === 201) {
+          connector.default.prototype.setWaitingForPlayer2Listener();
+        }
         console.log(data);
-      }
-    )
+      })
     this.room = mocks.room;
     return this.room;
   }
-  
+
   updateInfos(newRoomInfos) {
     this.room = newRoomInfos;
     return this.room;
   }
-  
+
   leaveRoom() {
     this.room = null;
-    ConnectorProvider.sendRequest(
+    let connector = require('./../providers/connector.provider');
+    connector.default.prototype.sendRequest(
       'butterfly',
-      'DELETE',
       {
         roomId: this.room.id
       },
@@ -46,8 +48,7 @@ class RoomProvider {
     ).then(
       (data) => {
         console.log(data);
-      }
-    )
+      })
   }
 }
 
