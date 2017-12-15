@@ -133,8 +133,15 @@ module.exports = {
                 .then(fighter => {
                     return module.exports.retrieveIo(req.body.roomId)
                     .then(room => {
+
                       let data = room
-                      data.battleLog = skill.effect
+                      let battleLog = {
+                        attackerId: req.body.attackerId,
+                        dmg: skill.base_attack,
+                        effect: skill.effect
+                      }
+
+                      data.battleLog = battleLog
                       return data
                     })
                 })

@@ -47,14 +47,6 @@ module.exports = function(sequelize, DataTypes) {
         model: 'skill',
         key: 'id'
       }
-    },
-    picture: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'picture',
-        key: 'id'
-      }
     }
   }, {
     tableName: 'butterfly'
