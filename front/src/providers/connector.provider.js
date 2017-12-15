@@ -29,7 +29,7 @@ class connectorProvider {
   }
 
   setWaitingForPlayer2Listener() {
-    // LoaderProvider.setLoader(true, 'En attente d\'un autre joueur')
+    LoaderProvider.setLoader(true, 'En attente d\'un autre joueur')
     this.socket.on('playerJoined', () => {
       LoaderProvider.setLoader(false, 'En attente d\'un autre joueur')
       this.socket.removeListener('playerJoined');

@@ -17,7 +17,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.connector.default.prototype.setConnection();
-    this.roomProvider.default.prototype.getRoom();
   }
 
   componentDidMount() {

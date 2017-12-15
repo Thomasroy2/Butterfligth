@@ -14,7 +14,8 @@
       background-color: red;
       width: 200px;
       height: 10px;
-      display: flex; }
+      display: flex;
+      margin-top: 10px; }
     .player-interface .player-information-div .barreVie2 {
       position: relative;
       background-color: green;

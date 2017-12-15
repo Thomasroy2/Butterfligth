@@ -9,6 +9,7 @@ class FigthRoom extends Component {
   roomProvider = require('./../../providers/room.provider');
   constructor(props) {
     super(props);
+    this.roomProvider.default.prototype.getRoom();
     this.state = {
       roomInfos: this.roomProvider.default.prototype.room
     }

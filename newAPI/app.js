@@ -46,17 +46,11 @@ io.on('connection', function (socket) {
         butterflyControl.generateIo().then(
           (data) => {
             butterfly = data;
-            roomControl.createIo(butterfly).then(
+            // TODO: change retrieveIo to createIo(butterfly)
+            roomControl.retrieveIo(5).then(
               (data) => {
                 socket.join(data.id);
                 const response = { code: 201, room: data };
-                socket.emit('new_message');
-                setInterval(
-                  () => {
-                    socket.emit('new_message');
-                  },
-                  5000
-                );
                 fn(response);
               }
             );

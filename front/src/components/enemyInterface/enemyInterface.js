@@ -24,7 +24,7 @@ class EnemyInterface extends Component {
             Joueur 2
           </h2>
           <p>
-            <strong>Nom </strong> :
+            <strong>Nom : </strong>
             {this.state.enemyInfos.name}
           </p>
           <p>

@@ -11,7 +11,7 @@ class BattleLogProvider {
     connector.default.prototype.sendRequest(
       'battleLog',
       {},
-      false,
+      true,
       'Chargement des logs'
     ).then(
       (data) => {

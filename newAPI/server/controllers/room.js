@@ -15,6 +15,7 @@ module.exports = {
       name:'YOLOOOOOOOOOOO',
       butterfly1: butterfly.id,
       life1: butterfly.hp,
+      cashpool: 0
     })
     .then(room => {
       return room;

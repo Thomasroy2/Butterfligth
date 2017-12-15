@@ -7,7 +7,7 @@ class HpDetail extends React.Component {
       <div>
         <p>
           <strong>Point de vie : </strong>
-          {this.props.currentHp} / <b>{this.props.maxHp}</b><br/><br/>
+          {this.props.currentHp} / <b>{this.props.maxHp}</b><br/>
           <center>
             <div className="barreVie">
                 <div 

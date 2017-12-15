@@ -16,12 +16,13 @@ class RoomProvider {
       {
         combat: true
       },
-      false,
+      true,
       'Recherche d\'une salle de combat'
     )
       .then(
       (data) => {
         if (data.code === 201) {
+          this.room = this.parseRoomBddToFront(data.room);
           connector.default.prototype.setWaitingForPlayer2Listener();
         }
         console.log(data);
@@ -50,6 +51,23 @@ class RoomProvider {
         console.log(data);
       })
   }
+
+  parseRoomBddToFront(roomData) {
+    let parsedRoom;
+    parsedRoom = {
+      id: roomData.id || 0,
+      player: this.parseButterflyBddToFront(roomData.butterfly1),
+      enemy: this.parseButterflyBddToFront(roomData.butterfly2),
+      cashpool: roomData.cashpool
+    }
+
+    return parsedRoom;
+  }
+
+  parseButterflyBddToFront(butterflyData) {
+    
+  }
+
 }
 
 export default RoomProvider;
