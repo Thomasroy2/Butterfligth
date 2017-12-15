@@ -142,6 +142,12 @@ module.exports = {
                       }
 
                       data.battleLog = battleLog
+                      data.winner = null
+
+                      if ( fighter.hp <= 0)
+                      {
+                        data.winner = req.body.attackerId
+                      }
                       return data
                     })
                 })
@@ -150,6 +156,68 @@ module.exports = {
       })
       .then(data => {
         return res.status(200).send(data);
+      });
+  },
+
+  attackIo() {
+    return Room
+      .findById(req.body.roomId)
+      .then(room => {
+        if (!room) {
+          return res.status(404).send({
+            message: 'Room Not Found',
+          });
+        }
+        if (req.body.attackerId != room.butterfly1 && req.body.attackerId != room.butterfly2) {
+          return res.status(404).send({
+            message: 'Invalid attacker',
+          });
+        }
+
+        if (req.body.targetId != room.butterfly1 && req.body.targetId != room.butterfly2) {
+          return res.status(404).send({
+            message: 'Invalid target',
+          });
+        }
+        return skill
+            .findById(req.body.skillId, {
+                attributes: ['id', 'name', 'base_attack', 'effect'],
+          })
+          .then(skill => {
+              return fighter
+                .findById(req.body.targetId)
+                .then(fighter => {
+                  let newlife = fighter.hp - skill.base_attack
+                  return fighter
+                  .update({
+                    hp: newlife || fighter.hp,
+                })
+                .then(fighter => {
+                    return module.exports.retrieveIo(req.body.roomId)
+                    .then(room => {
+
+                      let data = room
+                      let battleLog = {
+                        attackerId: req.body.attackerId,
+                        dmg: skill.base_attack,
+                        effect: skill.effect
+                      }
+
+                      data.battleLog = battleLog
+                      data.winner = null
+
+                      if ( fighter.hp <= 0)
+                      {
+                        data.winner = req.body.attackerId
+                      }
+                      return data
+                    })
+                })
+          })
+        })
+      })
+      .then(data => {
+        return data;
       });
   },
 
