@@ -54,6 +54,8 @@ class PlayerInterface extends Component {
             currentHp={this.state.joueurInfos.hp}
           />
           <ButterflyDetails
+            attack= {this.state.joueurInfos.attack}
+            defense= {this.state.joueurInfos.defense}
             speed={this.state.joueurInfos.speed}
             mortality={this.state.joueurInfos.mortality}
             luck={this.state.joueurInfos.luck}

@@ -9,27 +9,48 @@ class FigthRoom extends Component {
   roomProvider = require('./../../providers/room.provider');
   constructor(props) {
     super(props);
-    this.roomProvider.default.prototype.getRoom();
     this.state = {
-      roomInfos: this.roomProvider.default.prototype.room
+      roomInfos: [],
+      isLoaded: false
     }
-    console.log(this.state.roomInfos);
+    this.roomProvider.default.prototype.getRoom().then(
+      (roomInfos) => {
+        console.log(roomInfos)
+        this.setState({
+          roomInfos: roomInfos,
+          isLoaded: true
+        })
+        console.log(this.state.roomInfos);
+      }
+    ).catch(
+      (error) => {
+        console.log(error)
+        throw 'Create room error';
+      }
+      );
   }
 
   render() {
-    return (
-      <div className="figth-room">
-        <div className="player-interface-div">
-          <PlayerInterface joueurInfos={this.state.roomInfos.player} />
+    if (this.state.isLoaded) {
+      return (
+        <div className="figth-room">
+          <div className="player-interface-div">
+            <PlayerInterface joueurInfos={this.state.roomInfos.player} />
+          </div>
+          <div className="battle-log-div">
+            <BattleLog />
+          </div>
+          <div className="enemy-interface-div">
+            <EnemyInterface enemyInfos={this.state.roomInfos.enemy} />
+          </div>
         </div>
-        <div className="battle-log-div">
-          <BattleLog />
+      );
+    } else {
+      return (
+        <div>
         </div>
-        <div className="enemy-interface-div">
-          <EnemyInterface enemyInfos={this.state.roomInfos.enemy} />
-        </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
