@@ -5,6 +5,7 @@ import AttackProvider from './attack.provider';
 class RoomProvider {
 
   room;
+
   constructor() {
   }
 
@@ -61,6 +62,7 @@ class RoomProvider {
       id: roomData.id || 0,
       player: this.parseButterflyBddToFront((pageId ? roomData.butterfly1 : roomData.butterfly2), pageId),
       enemy: this.parseButterflyBddToFront((!pageId ? roomData.butterfly1 : roomData.butterfly2), !pageId),
+      battleLog: roomData.battleLog || [],
       cashpool: roomData.cashpool
     }
 
@@ -75,14 +77,14 @@ class RoomProvider {
       catchphrase: butterflyData.butterfly.catchphrase || '',
       hp: butterflyData.hp || 0,
       maxHp: butterflyData.butterfly.hp || 0,
-      attack:butterflyData.butterfly.attack || 0,
-      defense:butterflyData.butterfly.defense || 0,
-      luck:butterflyData.butterfly.luck || 0,
-      speed:butterflyData.butterfly.speed || 0,
-      mortality:butterflyData.butterfly.mortality || 0,
-      unique_skill:butterflyData.butterfly.unique_skill || 0,
+      attack: butterflyData.butterfly.attack || 0,
+      defense: butterflyData.butterfly.defense || 0,
+      luck: butterflyData.butterfly.luck || 0,
+      speed: butterflyData.butterfly.speed || 0,
+      mortality: butterflyData.butterfly.mortality || 0,
+      unique_skill: butterflyData.butterfly.unique_skill || 0,
       pic: me ? 'image2.png' : 'image4.png',
-      attacks:[],
+      attacks: []
     }
     parsedButterfly.attacks.push({
       attackId: butterflyData.skill1 ? (butterflyData.skill1.id || 0) : 0,
