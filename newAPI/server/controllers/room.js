@@ -159,33 +159,33 @@ module.exports = {
       });
   },
 
-  attackIo() {
+  attackIo(attackinfo) {
     return Room
-      .findById(req.body.roomId)
+      .findById(attackinfo.roomId)
       .then(room => {
         if (!room) {
           return res.status(404).send({
             message: 'Room Not Found',
           });
         }
-        if (req.body.attackerId != room.butterfly1 && req.body.attackerId != room.butterfly2) {
+        if (attackinfo.attackerId != room.butterfly1 && attackinfo.attackerId != room.butterfly2) {
           return res.status(404).send({
             message: 'Invalid attacker',
           });
         }
 
-        if (req.body.targetId != room.butterfly1 && req.body.targetId != room.butterfly2) {
+        if (attackinfo.targetId != room.butterfly1 && attackinfo.targetId != room.butterfly2) {
           return res.status(404).send({
             message: 'Invalid target',
           });
         }
         return skill
-            .findById(req.body.skillId, {
+            .findById(attackinfo.skillId, {
                 attributes: ['id', 'name', 'base_attack', 'effect'],
           })
           .then(skill => {
               return fighter
-                .findById(req.body.targetId)
+                .findById(attackinfo.targetId)
                 .then(fighter => {
                   let newlife = fighter.hp - skill.base_attack
                   return fighter
@@ -193,12 +193,12 @@ module.exports = {
                     hp: newlife || fighter.hp,
                 })
                 .then(fighter => {
-                    return module.exports.retrieveIo(req.body.roomId)
+                    return module.exports.retrieveIo(attackinfo.roomId)
                     .then(room => {
 
                       let data = room
                       let battleLog = {
-                        attackerId: req.body.attackerId,
+                        attackerId: attackinfo.attackerId,
                         dmg: skill.base_attack,
                         effect: skill.effect
                       }
@@ -208,7 +208,7 @@ module.exports = {
 
                       if ( fighter.hp <= 0)
                       {
-                        data.winner = req.body.attackerId
+                        data.winner = attackinfo.attackerId
                       }
                       return data
                     })

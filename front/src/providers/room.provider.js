@@ -1,6 +1,6 @@
 import mocks from './../mocks/mocks';
-import ConnectorProvider from './connector.provider';
 import LoaderProvider from './loader.provider';
+import AttackProvider from './attack.provider';
 
 class RoomProvider {
 
@@ -9,7 +9,7 @@ class RoomProvider {
   }
 
 
-  getRoom() {
+  getRoom(pageId) {
     let connector = require('./../providers/connector.provider');
     return connector.default.prototype.sendRequest(
       'room',
@@ -22,16 +22,16 @@ class RoomProvider {
       .then(
       (data) => {
         if (data.code === 201) {
-          this.room = this.parseRoomBddToFront(data.room);
+          this.room = this.parseRoomBddToFront(data.room, pageId);
           connector.default.prototype.setWaitingForPlayer2Listener();
+          connector.default.prototype.setAttackListener();
+          AttackProvider.setCanAttack(true);
           return this.room;
         } else {
           console.log(data);
           Promise.reject(data);
         }
       })
-    // this.room = mocks.room;
-    // return this.room;
   }
 
   updateInfos(newRoomInfos) {
@@ -55,12 +55,12 @@ class RoomProvider {
       })
   }
 
-  parseRoomBddToFront(roomData) {
+  parseRoomBddToFront(roomData, pageId) {
     let parsedRoom;
     parsedRoom = {
       id: roomData.id || 0,
-      player: this.parseButterflyBddToFront(roomData.butterfly1, true),
-      enemy: this.parseButterflyBddToFront(roomData.butterfly2, false),
+      player: this.parseButterflyBddToFront((pageId ? roomData.butterfly1 : roomData.butterfly2), pageId),
+      enemy: this.parseButterflyBddToFront((!pageId ? roomData.butterfly1 : roomData.butterfly2), !pageId),
       cashpool: roomData.cashpool
     }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AttackProvider from './../../providers/attack.provider';
 
 class AttackButton extends Component {
 
@@ -6,17 +7,13 @@ class AttackButton extends Component {
     super(props);
 
     this.state = {
-      label:  props.label,
-      attackId:    props.attackId
+      label: props.attack.label,
+      attackId: props.attack.attackId
     }
   }
 
   handleClick = (event) => {
-    this.props.onClick(event.target.id);
-  }
-
-  componentDidMount(props) {
-
+    AttackProvider.launchAttack(event.target.id);
   }
 
   render() {
@@ -25,7 +22,6 @@ class AttackButton extends Component {
         <button
           id={this.state.attackId}
           onClick={this.handleClick}
-          enabled={this.props.enabled}
         >
           {this.state.label}
         </button>

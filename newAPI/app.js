@@ -32,7 +32,12 @@ io.on('connection', function (socket) {
   * Reception d'attaque et envoie de la notification au client.
   */
   socket.on('attack', function (attackinfo, fn) {
-    
+    roomControl.attackIo(attackinfo).then(
+      (roomInfo) => {
+        socket.in(roomInfo.id).emit('attackUsed', roomInfo);
+        fn(roomInfo);
+      }
+    );
     //io.emit(type.room+'bet',attackAction(type));
   });
   /**
@@ -47,8 +52,9 @@ io.on('connection', function (socket) {
           (data) => {
             butterfly = data;
             // TODO: change retrieveIo to createIo(butterfly)
-            roomControl.retrieveIo(5).then(
+            roomControl.retrieveIo(7).then(
               (data) => {
+                console.log(data);
                 socket.join(data.id);
                 const response = { code: 201, room: data };
                 fn(response);

@@ -1,9 +1,10 @@
 import Settings from './../settings/settings';
 import io from 'socket.io-client';
 import LoaderProvider from './loader.provider';
+import AttackProvider from './attack.provider';
 import { setInterval } from 'timers';
 
-class connectorProvider {
+class ConnectorProvider {
 
   socket;
 
@@ -35,6 +36,14 @@ class connectorProvider {
       this.socket.removeListener('playerJoined');
     });
   }
+
+  setAttackListener() {
+    console.log('1');
+    this.socket.on('attackUsed', () => {
+      console.log('2?');
+      AttackProvider.setCanAttack(false);
+    })
+  }
 }
 
-export default connectorProvider;
+export default ConnectorProvider;

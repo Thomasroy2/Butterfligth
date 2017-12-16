@@ -1,9 +1,6 @@
-import { CHANGE_LOADING_STATE, CHANGE_LOADING_MESSAGE } from './../../actions';
+import { CHANGE_LOADING_STATE } from './../../actions';
 
 const initialState = {
-  /**
-   * List of all products
-   */
   isLoading: false,
   loadingMessage: ''
 };

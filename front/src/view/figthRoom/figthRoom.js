@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BattleLog from './../../components/battleLog/battleLog';
 import EnemyInterface from './../../components/enemyInterface/enemyInterface';
-import PlayerInterface from './../../components/fightInterface/playerInterface';
+import PlayerInterface from './../../containers/playerInterface';
 import './figthRoom.css';
 
 class FigthRoom extends Component {
@@ -11,9 +11,11 @@ class FigthRoom extends Component {
     super(props);
     this.state = {
       roomInfos: [],
-      isLoaded: false
+      isLoaded: false,
+      paramId: (props.match.params.id == 1)
     }
-    this.roomProvider.default.prototype.getRoom().then(
+    console.log(this.state.paramId);
+    this.roomProvider.default.prototype.getRoom(this.state.paramId).then(
       (roomInfos) => {
         console.log(roomInfos)
         this.setState({

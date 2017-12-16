@@ -10,8 +10,8 @@ class LoaderComponent extends Component {
   render() {
     const customStyles = {
       content: {
-        top: '45%',
-        left: '40%',
+        position: '45%',
+        left: '50%',
         right: 'auto',
         bottom: 'auto',
         padding: '0'

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import AttackButton from './attackButton';
 import ButterflyDetails from './butterflyDetails';
 import HpDetail from './hpDetail';
+import Modal from 'react-modal';
 import './fightroom.css';
 
 class PlayerInterface extends Component {
@@ -10,19 +11,9 @@ class PlayerInterface extends Component {
   constructor(props) {
     super(props);
 
+    console.log(this.props);
     this.state = {
       joueurInfos: props.joueurInfos,
-      attacks: [
-        ['1', 'Coup de patte'],
-        ['2', 'Battement d\'aile'],
-        ['3', 'Charge'],
-        ['4', 'Katana']
-      ],
-      properties: {
-        'speed': '40',
-        'mortality': '5',
-        'luck': '55',
-      },
       sendState: 'pending'
     }
   }
@@ -60,7 +51,15 @@ class PlayerInterface extends Component {
             mortality={this.state.joueurInfos.mortality}
             luck={this.state.joueurInfos.luck}
           />
-          
+          <Modal isOpen={this.props.canAttack}>
+            {this.state.joueurInfos.attacks.map(
+              (attack) => {
+              return (
+                <AttackButton attack={attack}>
+                </AttackButton>
+              );
+            })}
+          </Modal>
         </div>
       </div>
     );

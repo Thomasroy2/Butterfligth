@@ -1,6 +1,5 @@
 import {
-    changeLoadingState as changeLoadingStateAction,
-    changeLoadingMessage as changeLoadingMessageAction
+    changeLoadingState as changeLoadingStateAction
 } from './../actions';
 import store from '../store/index';
 

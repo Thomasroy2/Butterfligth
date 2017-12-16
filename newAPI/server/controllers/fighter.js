@@ -91,7 +91,7 @@ module.exports = {
         let data = fighter.toJSON()
         console.log(data)
         return butterfly.findById(data.butterflyId, {
-            attributes: ['id', 'name', 'catchphrase', 'hp', 'mortality', 'attack'],
+            attributes: ['id', 'name', 'catchphrase', 'hp', 'attack', 'defense', 'luck', 'speed', 'mortality'],
           })
           .then(butterfly => {
             data.butterfly = butterfly.dataValues
