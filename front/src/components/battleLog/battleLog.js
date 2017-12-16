@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import './battleLog.css';
-import BattleLogProvider from './../../providers/battleLog.provider'
 
 class BattleLog extends Component {
 
-  battleLogProvider = new BattleLogProvider();
   constructor(props) {
     super(props);
     this.state = {
-      battleLogs: this.battleLogProvider.getAllLog(),
+      battleLogs: props.fightroom.fightroom.battleLog,
     }
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      battleLogs: props.fightroom.fightroom.battleLog,
+    });
+    console.log(props.fightroom.fightroom);
+  }
+
+  componentDidUpdate() {
+    let element = document.getElementById('logs-div');
+    element.scrollTop = element.scrollHeight;
   }
 
   render() {
@@ -18,12 +28,13 @@ class BattleLog extends Component {
         <h2>
           Logs de combat
         </h2>
-        <div>
+        <div className="logs-div" id="logs-div">
         {this.state.battleLogs.map(
-          (battleLog) => {
+          (battleLog, index) => {
+            const source = (battleLog.attackerId === this.props.fightroom.fightroom.player.id) ? 'Joueur 1' : 'Joueur 2';
             return (
-              <p className="log-row" key={battleLog.id}>
-                <b>{battleLog.source}</b>&nbsp;{battleLog.message}&nbsp;<b>{battleLog.effect}</b>
+              <p className="log-row" key={index}>
+                <b>{source}</b>&nbsp;attaque et inflige&nbsp;<b>{battleLog.dmg} points de dégats</b>
               </p>
             )
           }

@@ -1,14 +1,13 @@
-import mocks from './../mocks/mocks';
-import LoaderProvider from './loader.provider';
 import AttackProvider from './attack.provider';
+import {
+  updateFightroomData as updateFightroomDataAction
+} from './../actions';
+import store from '../store/index';
 
 class RoomProvider {
 
   room;
-
-  constructor() {
-  }
-
+  pageId;
 
   getRoom(pageId) {
     let connector = require('./../providers/connector.provider').default.prototype;
@@ -23,48 +22,66 @@ class RoomProvider {
       .then(
       (data) => {
         if (data.code === 201) {
-          this.room = this.parseRoomBddToFront(data.room, pageId);
+          this.pageId = pageId;
+          this.updateInfos(data.room);
           connector.setWaitingForPlayer2Listener();
           connector.setAttackListener();
           AttackProvider.setCanAttack(true);
           return this.room;
         } else {
-          console.log(data);
           Promise.reject(data);
         }
       })
   }
 
   updateInfos(newRoomInfos) {
-    this.room = this.parseRoomBddToFront(newRoomInfos);
+    this.room = this.parseRoomBddToFront(newRoomInfos, this.pageId);
+    store.dispatch(updateFightroomDataAction(this.room));
     return this.room;
   }
 
-  leaveRoom() {
-    this.room = null;
-    let connector = require('./../providers/connector.provider').default.prototype;
-    connector.sendRequest(
-      'butterfly',
-      {
-        roomId: this.room.id
-      },
-      false,
-      ''
-    ).then(
-      (data) => {
-        console.log(data);
-      })
-  }
+  // leaveRoom() {
+  //   this.room = null;
+  //   let connector = require('./../providers/connector.provider').default.prototype;
+  //   connector.sendRequest(
+  //     'butterfly',
+  //     {
+  //       roomId: this.room.id
+  //     },
+  //     false,
+  //     ''
+  //   ).then(
+  //     (data) => {
+  //     })
+  // }
 
   parseRoomBddToFront(roomData, pageId) {
+    let battleLog = [];
+    if (this.room && this.room.battleLog.length !== 0) {
+      this.room.battleLog.map(
+        (roomBattleLog) => {
+          battleLog.push(roomBattleLog);
+        }
+      );
+    }
+    if (roomData.battleLog) {
+      battleLog.push(roomData.battleLog);
+    }
+    console.log(battleLog);
     let parsedRoom;
     parsedRoom = {
       id: roomData.id || 0,
       player: this.parseButterflyBddToFront((pageId ? roomData.butterfly1 : roomData.butterfly2), pageId),
       enemy: this.parseButterflyBddToFront((!pageId ? roomData.butterfly1 : roomData.butterfly2), !pageId),
-      battleLog: roomData.battleLog || [],
+      battleLog: battleLog || [],
       cashpool: roomData.cashpool
     }
+
+    // if (roomData.battleLog != null) {
+    //   parsedRoom.battleLog.push(roomData.battleLog);
+    // } else {
+    //   parsedRoom.battleLog = [];
+    // }
 
     return parsedRoom;
   }

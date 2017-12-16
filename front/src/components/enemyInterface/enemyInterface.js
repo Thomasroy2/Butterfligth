@@ -6,8 +6,14 @@ class EnemyInterface extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      enemyInfos: props.enemyInfos,
+      enemyInfos: props.fightroom.fightroom.enemy,
     }
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      enemyInfos: props.fightroom.fightroom.enemy,
+    });
   }
 
   render() {

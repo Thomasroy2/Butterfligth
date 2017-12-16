@@ -11,11 +11,15 @@ class PlayerInterface extends Component {
   constructor(props) {
     super(props);
 
-    console.log(this.props);
     this.state = {
-      joueurInfos: props.joueurInfos,
-      sendState: 'pending'
+      joueurInfos: props.fightroom.fightroom.player
     }
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      joueurInfos: props.fightroom.fightroom.player,
+    });
   }
 
   handleClick = (attackId) => {

@@ -34,7 +34,7 @@ io.on('connection', function (socket) {
   socket.on('attack', function (attackinfo, fn) {
     roomControl.attackIo(attackinfo).then(
       (roomInfo) => {
-        socket.in(roomInfo.id).emit('attackUsed', roomInfo);
+        socket.to(roomInfo.id).emit('attackUsed', roomInfo);
         fn(roomInfo);
       }
     );

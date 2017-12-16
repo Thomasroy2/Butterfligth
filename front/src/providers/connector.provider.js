@@ -10,7 +10,6 @@ class ConnectorProvider {
 
   setConnection() {
     this.socket = io(Settings.API_URL + ':' + Settings.API_PORT);
-    console.log('1?');
   }
 
   sendRequest(requestName, requestParams, useLoader, loaderMessage) {
@@ -38,10 +37,11 @@ class ConnectorProvider {
   }
 
   setAttackListener() {
-    console.log('1');
-    this.socket.on('attackUsed', () => {
-      console.log('2?');
-      AttackProvider.setCanAttack(false);
+    const roomProvider = require('./room.provider').default.prototype;
+    this.socket.on('attackUsed', (roomInfo) => {
+      console.log('1', roomInfo);
+      roomProvider.updateInfos(roomInfo);
+      AttackProvider.setCanAttack(true);
     })
   }
 }

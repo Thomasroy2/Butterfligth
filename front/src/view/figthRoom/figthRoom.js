@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import BattleLog from './../../components/battleLog/battleLog';
-import EnemyInterface from './../../components/enemyInterface/enemyInterface';
+import BattleLog from './../../containers/battleLog';
+import EnemyInterface from './../../containers/enemyInterface';
 import PlayerInterface from './../../containers/playerInterface';
 import './figthRoom.css';
 
@@ -14,19 +14,16 @@ class FigthRoom extends Component {
       isLoaded: false,
       paramId: (props.match.params.id == 1)
     }
-    console.log(this.state.paramId);
     this.roomProvider.getRoom(this.state.paramId).then(
       (roomInfos) => {
-        console.log(roomInfos)
         this.setState({
           roomInfos: roomInfos,
           isLoaded: true
         })
-        console.log(this.state.roomInfos);
       }
     ).catch(
       (error) => {
-        console.log(error)
+        console.error(error)
         throw 'Create room error';
       }
       );
@@ -37,13 +34,13 @@ class FigthRoom extends Component {
       return (
         <div className="figth-room">
           <div className="player-interface-div">
-            <PlayerInterface joueurInfos={this.state.roomInfos.player} />
+            <PlayerInterface />
           </div>
           <div className="battle-log-div">
             <BattleLog />
           </div>
           <div className="enemy-interface-div">
-            <EnemyInterface enemyInfos={this.state.roomInfos.enemy} />
+            <EnemyInterface />
           </div>
         </div>
       );

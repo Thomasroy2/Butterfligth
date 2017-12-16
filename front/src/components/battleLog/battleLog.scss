@@ -1,7 +1,11 @@
 .battle-log-component {
-    .log-row {
-        text-align: start;
-        padding: 5px 10px;
-        margin: 0;
+    .logs-div {
+        overflow-y: scroll;
+        height: calc(100vh - 140px);
+        .log-row {
+            text-align: start;
+            padding: 5px 10px;
+            margin: 0;
+        }
     }
 }

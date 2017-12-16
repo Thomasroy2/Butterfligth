@@ -10,7 +10,6 @@ class LoginPage extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(mocks.login)
     this.state = {
       redirection: false,
       identifiant: "",

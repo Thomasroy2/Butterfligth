@@ -1,13 +1,12 @@
 import {
     changeAttackState as changeAttackStateAction
 } from './../actions';
-import ConnectorProvider from './../providers/connector.provider';
 import store from '../store/index';
 
 class AttackProvider {
-    
+
     /**
-     * 
+     *
      * @param {*boolean} canAttack Affiche ou non la modal des attacks
      */
     static setCanAttack(canAttack) {
@@ -15,7 +14,7 @@ class AttackProvider {
     }
 
     /**
-     * 
+     *
      * @param {*Number} attackId Id of the attack to use
      */
     static launchAttack(attackId) {
@@ -35,7 +34,6 @@ class AttackProvider {
             ''
         ).then(
             (room) => {
-                console.log(room);
                 roomProvider.updateInfos(room);
             }
         );
