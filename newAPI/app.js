@@ -44,6 +44,7 @@ io.on('connection', function (socket) {
   * Rejoindre la salle
   */
   socket.on('room', function (requestroom, fn) {
+    console.log(socket.id);
     if (requestroom.combat == true) {
       if (!roomControl.checkIfAnyRoomWithoutTwoPeople) {
         let butterfly;
@@ -54,7 +55,6 @@ io.on('connection', function (socket) {
             // TODO: change retrieveIo to createIo(butterfly)
             roomControl.retrieveIo(5).then(
               (data) => {
-                console.log(data);
                 socket.join(data.id);
                 const response = { code: 201, room: data };
                 fn(response);

@@ -43,7 +43,6 @@ module.exports = {
           });
         }
         let data = fighter.toJSON()
-        console.log(data)
         return butterfly.findById(data.butterflyId, {
             attributes: ['id', 'name', 'catchphrase', 'hp', 'mortality', 'attack'],
           })
@@ -89,7 +88,6 @@ module.exports = {
           });
         }
         let data = fighter.toJSON()
-        console.log(data)
         return butterfly.findById(data.butterflyId, {
             attributes: ['id', 'name', 'catchphrase', 'hp', 'attack', 'defense', 'luck', 'speed', 'mortality'],
           })
@@ -133,7 +131,6 @@ module.exports = {
           });
         }
         let data = fighter.toJSON()
-        console.log(data)
         return butterfly.findById(data.butterflyId, {
             attributes: ['id', 'name', 'catchphrase', 'hp', 'mortality', 'attack'],
           })

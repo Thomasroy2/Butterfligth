@@ -13,6 +13,7 @@ class ConnectorProvider {
   }
 
   sendRequest(requestName, requestParams, useLoader, loaderMessage) {
+    console.log(this.socket);
     return new Promise((resolve, reject) => {
       if (useLoader) {
         LoaderProvider.setLoader(useLoader, loaderMessage);
