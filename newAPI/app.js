@@ -52,7 +52,7 @@ io.on('connection', function (socket) {
           (data) => {
             butterfly = data;
             // TODO: change retrieveIo to createIo(butterfly)
-            roomControl.retrieveIo(7).then(
+            roomControl.retrieveIo(5).then(
               (data) => {
                 console.log(data);
                 socket.join(data.id);
@@ -77,11 +77,11 @@ io.on('connection', function (socket) {
       fn(response);
     }
   });
-  
+
   /**
   * Envoi de message sur le chat de paris.
   */
-  
+
   socket.on('betchat', function (message) {
     if (chatControl.isInsult(message.msg)) {
       chatControl.storeMessage(message.author, message.msg);
@@ -98,7 +98,7 @@ io.on('connection', function (socket) {
         author: message.author
       });
     }
-    
+
   });
   /**
   * Reception de paris.

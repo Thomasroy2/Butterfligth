@@ -10,8 +10,8 @@ class RoomProvider {
 
 
   getRoom(pageId) {
-    let connector = require('./../providers/connector.provider');
-    return connector.default.prototype.sendRequest(
+    let connector = require('./../providers/connector.provider').default.prototype;
+    return connector.sendRequest(
       'room',
       {
         combat: true
@@ -23,8 +23,8 @@ class RoomProvider {
       (data) => {
         if (data.code === 201) {
           this.room = this.parseRoomBddToFront(data.room, pageId);
-          connector.default.prototype.setWaitingForPlayer2Listener();
-          connector.default.prototype.setAttackListener();
+          connector.setWaitingForPlayer2Listener();
+          connector.setAttackListener();
           AttackProvider.setCanAttack(true);
           return this.room;
         } else {
@@ -35,14 +35,14 @@ class RoomProvider {
   }
 
   updateInfos(newRoomInfos) {
-    this.room = newRoomInfos;
+    this.room = this.parseRoomBddToFront(newRoomInfos);
     return this.room;
   }
 
   leaveRoom() {
     this.room = null;
-    let connector = require('./../providers/connector.provider');
-    connector.default.prototype.sendRequest(
+    let connector = require('./../providers/connector.provider').default.prototype;
+    connector.sendRequest(
       'butterfly',
       {
         roomId: this.room.id

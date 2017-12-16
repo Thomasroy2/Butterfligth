@@ -18,14 +18,14 @@ class AttackButton extends Component {
 
   render() {
     return (
-      <div className="button">
-        <button
-          id={this.state.attackId}
-          onClick={this.handleClick}
-        >
-          {this.state.label}
-        </button>
-      </div>
+        <div className="button">
+          <button
+            id={this.state.attackId}
+            onClick={this.handleClick}
+          >
+            {this.state.label}
+          </button>
+        </div>
     )
   }
 

@@ -12,11 +12,10 @@ import {
 
 class App extends Component {
 
-  roomProvider = require('./../providers/room.provider');
-  connector = require('./../providers/connector.provider');
+  connector = require('./../providers/connector.provider').default.prototype;
   constructor(props) {
     super(props);
-    this.connector.default.prototype.setConnection();
+    this.connector.setConnection();
   }
 
   componentDidMount() {

@@ -6,7 +6,7 @@ import './figthRoom.css';
 
 class FigthRoom extends Component {
 
-  roomProvider = require('./../../providers/room.provider');
+  roomProvider = require('./../../providers/room.provider').default.prototype;
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +15,7 @@ class FigthRoom extends Component {
       paramId: (props.match.params.id == 1)
     }
     console.log(this.state.paramId);
-    this.roomProvider.default.prototype.getRoom(this.state.paramId).then(
+    this.roomProvider.getRoom(this.state.paramId).then(
       (roomInfos) => {
         console.log(roomInfos)
         this.setState({

@@ -3,7 +3,7 @@
     display: flex;
     flex-flow: column;
     height: 100%;
-    .player-information-div 
+    .player-information-div
     {
         background-color: #ef43d6;
         border-style: solid;
@@ -32,21 +32,21 @@
             width: 200px;
             height: 130px;
         }
-        .player-bouton-div {
-            display: flex;
-            flex-flow: row wrap;
-            .button {
-                margin: 0 auto;
-                button
-                {
-                    color:white;
-                    border-color:grey;
-                    background-color:grey;
-                    height: 100px;
-                    min-width: 200px;
-                    margin-top:20px;
-                }
-            }
+    }
+}
+.player-bouton-div {
+    display: flex;
+    flex-flow: row wrap;
+    .button {
+        margin: 0 auto;
+        button
+        {
+            color:white;
+            border-color:grey;
+            background-color:grey;
+            height: 100px;
+            min-width: 200px;
+            margin: 10px 0;
         }
     }
 }

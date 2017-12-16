@@ -24,15 +24,16 @@
     .player-interface .player-information-div .taille {
       width: 200px;
       height: 130px; }
-    .player-interface .player-information-div .player-bouton-div {
-      display: flex;
-      flex-flow: row wrap; }
-      .player-interface .player-information-div .player-bouton-div .button {
-        margin: 0 auto; }
-        .player-interface .player-information-div .player-bouton-div .button button {
-          color: white;
-          border-color: grey;
-          background-color: grey;
-          height: 100px;
-          min-width: 200px;
-          margin-top: 20px; }
+
+.player-bouton-div {
+  display: flex;
+  flex-flow: row wrap; }
+  .player-bouton-div .button {
+    margin: 0 auto; }
+    .player-bouton-div .button button {
+      color: white;
+      border-color: grey;
+      background-color: grey;
+      height: 100px;
+      min-width: 200px;
+      margin: 10px 0; }

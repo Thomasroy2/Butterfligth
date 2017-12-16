@@ -23,8 +23,16 @@ class PlayerInterface extends Component {
   }
 
   render() {
-    let img = require('./../../assets/img/' + this.state.joueurInfos.pic);
-    console.log(img);
+    let img = require('../../assets/img/' + this.state.joueurInfos.pic);
+    const customStyles = {
+      content: {
+        top: '30%',
+        left: '35%',
+        right: '35%',
+        bottom: 'auto',
+        padding: '0'
+      }
+    }
     return (
       <div className="player-interface">
         <div className="player-image-div">
@@ -45,20 +53,23 @@ class PlayerInterface extends Component {
             currentHp={this.state.joueurInfos.hp}
           />
           <ButterflyDetails
-            attack= {this.state.joueurInfos.attack}
-            defense= {this.state.joueurInfos.defense}
+            attack={this.state.joueurInfos.attack}
+            defense={this.state.joueurInfos.defense}
             speed={this.state.joueurInfos.speed}
             mortality={this.state.joueurInfos.mortality}
             luck={this.state.joueurInfos.luck}
           />
-          <Modal isOpen={this.props.canAttack}>
-            {this.state.joueurInfos.attacks.map(
-              (attack) => {
-              return (
-                <AttackButton attack={attack}>
-                </AttackButton>
-              );
-            })}
+          <Modal isOpen={this.props.canAttack} style={customStyles}>
+
+            <div className="player-bouton-div">
+              {this.state.joueurInfos.attacks.map(
+                (attack) => {
+                  return (
+                    <AttackButton attack={attack}>
+                    </AttackButton>
+                  );
+                })}
+            </div>
           </Modal>
         </div>
       </div>
