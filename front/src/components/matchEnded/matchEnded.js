@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import './loader.css';
+import './matchEnded.css';
 import Modal from 'react-modal';
 import Loader from 'react-loaders';
 
-class LoaderComponent extends Component {
+class MatchEnded extends Component {
+
   constructor(props) {
     super(props);
   }
+
   render() {
     const customStyles = {
       content: {
@@ -17,15 +19,15 @@ class LoaderComponent extends Component {
         padding: '0'
       }
     }
+    console.log(this.props);
     return (
-      <Modal isOpen={this.props.isLoading} style={customStyles}>
+      <Modal isOpen={this.props.matchEnded} style={customStyles}>
         <div className="modal-content">
-          <Loader type="ball-pulse" style={{ transform: 'scale(0.7)' }} active />
-          <p>{this.props.loadingMessage}</p>
+          <p>{this.props.won ? 'Vous avez gagnez!' : 'Vous avez perdu!'}</p>
         </div>
       </Modal>
     );
   }
 }
 
-export default LoaderComponent;
+export default MatchEnded;

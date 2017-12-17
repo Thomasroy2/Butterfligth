@@ -7,8 +7,11 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Route,
-} from 'react-router-dom'
+} from 'react-router-dom';
 
+{/* <Modal isOpen={this.state.matchEnded} style={customStyles}>
+{this.state.won ? 'Vous avez gagnez!' : 'Vous avez perdu!'}
+</Modal> */}
 
 class App extends Component {
 
@@ -16,6 +19,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.connector.setConnection();
+    this.state = {
+      matchEnded: props.matchEnded,
+      won: props.won
+    };
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      matchEnded: props.matchEnded,
+      won: props.won
+    });
   }
 
   componentDidMount() {

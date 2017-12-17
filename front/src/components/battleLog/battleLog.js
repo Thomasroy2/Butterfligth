@@ -14,7 +14,6 @@ class BattleLog extends Component {
     this.setState({
       battleLogs: props.fightroom.fightroom.battleLog,
     });
-    console.log(props.fightroom.fightroom);
   }
 
   componentDidUpdate() {

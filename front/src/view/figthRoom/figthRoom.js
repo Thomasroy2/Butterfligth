@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BattleLog from './../../containers/battleLog';
+import MatchEnded from './../../containers/matchEnded';
 import EnemyInterface from './../../containers/enemyInterface';
 import PlayerInterface from './../../containers/playerInterface';
 import './figthRoom.css';
@@ -12,7 +13,7 @@ class FigthRoom extends Component {
     this.state = {
       roomInfos: [],
       isLoaded: false,
-      paramId: (props.match.params.id == 1)
+      paramId: (props.match.params.id == 1),
     }
     this.roomProvider.getRoom(this.state.paramId).then(
       (roomInfos) => {
@@ -33,6 +34,7 @@ class FigthRoom extends Component {
     if (this.state.isLoaded) {
       return (
         <div className="figth-room">
+          <MatchEnded />
           <div className="player-interface-div">
             <PlayerInterface />
           </div>

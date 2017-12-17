@@ -2,7 +2,7 @@ import Settings from './../settings/settings';
 import io from 'socket.io-client';
 import LoaderProvider from './loader.provider';
 import AttackProvider from './attack.provider';
-import { setInterval } from 'timers';
+import store from '../store/index';
 
 class ConnectorProvider {
 
@@ -13,7 +13,6 @@ class ConnectorProvider {
   }
 
   sendRequest(requestName, requestParams, useLoader, loaderMessage) {
-    console.log(this.socket);
     return new Promise((resolve, reject) => {
       if (useLoader) {
         LoaderProvider.setLoader(useLoader, loaderMessage);
@@ -40,9 +39,10 @@ class ConnectorProvider {
   setAttackListener() {
     const roomProvider = require('./room.provider').default.prototype;
     this.socket.on('attackUsed', (roomInfo) => {
-      console.log('1', roomInfo);
       roomProvider.updateInfos(roomInfo);
-      AttackProvider.setCanAttack(true);
+      if (!roomInfo.winner) {
+        AttackProvider.setCanAttack(true);
+      }
     })
   }
 }

@@ -44,7 +44,6 @@ io.on('connection', function (socket) {
   * Rejoindre la salle
   */
   socket.on('room', function (requestroom, fn) {
-    console.log(socket.id);
     if (requestroom.combat == true) {
       if (!roomControl.checkIfAnyRoomWithoutTwoPeople) {
         let butterfly;

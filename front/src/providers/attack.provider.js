@@ -30,7 +30,7 @@ class AttackProvider {
         connector.sendRequest(
             'attack',
             params,
-            false,
+            true,
             ''
         ).then(
             (room) => {
