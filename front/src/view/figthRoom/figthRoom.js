@@ -13,7 +13,7 @@ class FigthRoom extends Component {
     this.state = {
       roomInfos: [],
       isLoaded: false,
-      paramId: (props.match.params.id == 1),
+      paramId: (Number(props.match.params.id) === 1),
     }
     this.roomProvider.getRoom(this.state.paramId).then(
       (roomInfos) => {
@@ -25,7 +25,6 @@ class FigthRoom extends Component {
     ).catch(
       (error) => {
         console.error(error)
-        throw 'Create room error';
       }
       );
   }

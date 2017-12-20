@@ -1,7 +1,7 @@
 import { UPDATE_FIGHTROOM_DATA } from './../../actions';
 
 const initialState = {
-  fightroom: []
+    fightroom: []
 };
 
 export default (state = initialState, action) => {
@@ -12,6 +12,9 @@ export default (state = initialState, action) => {
                 ...state,
                 fightroom: action.payload.newData
             }
+        default:
+            console.error('Action non traité dans ce reducer');
+            break;
     }
 
     return state

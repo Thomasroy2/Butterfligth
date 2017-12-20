@@ -31,8 +31,8 @@ class PlayerInterface extends Component {
     const customStyles = {
       content: {
         top: '30%',
-        left: '35%',
-        right: '35%',
+        left: '38%',
+        right: '38%',
         bottom: 'auto',
         padding: '0'
       }

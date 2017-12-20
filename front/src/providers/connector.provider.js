@@ -2,7 +2,6 @@ import Settings from './../settings/settings';
 import io from 'socket.io-client';
 import LoaderProvider from './loader.provider';
 import AttackProvider from './attack.provider';
-import store from '../store/index';
 
 class ConnectorProvider {
 

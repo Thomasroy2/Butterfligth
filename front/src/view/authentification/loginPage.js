@@ -13,7 +13,7 @@ class LoginPage extends React.Component {
     this.state = {
       redirection: false,
       identifiant: "",
-      mdp:"",
+      mdp: "",
       identifiantInfo: mocks.login.num1
     }
   }
@@ -41,6 +41,7 @@ class LoginPage extends React.Component {
     else {
       return (
         <div className="authentif">
+          <Redirect to='/fightroom/1' />
           <label>
             Identifiant:
             <input
@@ -57,7 +58,7 @@ class LoginPage extends React.Component {
               onChange={this.handleChangeMdp}
             />
           </label><br /><br />
-         {/* <button
+          {/* <button
             onClick={this.handleClick}
           >
             S'authentifier
