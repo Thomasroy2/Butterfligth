@@ -1,6 +1,7 @@
 const butterflyController = require('../controllers').butterfly;
 const roomController = require('../controllers').room;
 const fighterController = require('../controllers').fighter;
+const battleLogsController = require('../controllers').battleLogs;
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({

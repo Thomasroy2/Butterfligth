@@ -1,36 +1,26 @@
-/* jshint indent: 2 */
-
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('room', {
+  return sequelize.define('battleLog', {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    name:{
-      type:DataTypes.STRING(50),
-      allowNull:false
-    },
-    butterfly1: {
+    attackerId: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: false
     },
-    butterfly2: {
+    attackerId: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: false
     },
-    attackerTurnId: {
+    targetId: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: false
     },
-    winner: {
+    skillId: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    cashpool: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: false
     },
     createdAt: {
             allowNull: false,
@@ -41,6 +31,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
     },
   }, {
-    tableName: 'rooms'
+    tableName: 'butterfly'
   });
 };
