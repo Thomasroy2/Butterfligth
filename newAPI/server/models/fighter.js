@@ -24,6 +24,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
+    skill3: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    skill4: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
     createdAt: {
             allowNull: false,
             type: DataTypes.DATE,
