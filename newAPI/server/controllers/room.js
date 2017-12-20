@@ -189,7 +189,7 @@ module.exports = {
                 let newlife = fighter.hp - skill.base_attack
                 return fighter
                   .update({
-                    hp: newlife,
+                    hp: (newlife <= 0) ? 0 : newlife,
                   })
                   .then(fighter => {
                     return module.exports.retrieveIo(attackinfo.roomId)
