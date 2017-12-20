@@ -41,7 +41,7 @@ class LoginPage extends React.Component {
     else {
       return (
         <div className="authentif">
-          <Redirect to='/fightroom/1' />
+          <Redirect to='/fightroom' />
           <label>
             Identifiant:
             <input

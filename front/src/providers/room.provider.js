@@ -8,7 +8,7 @@ import store from '../store/index';
 class RoomProvider {
 
   room;
-  pageId;
+  isFirstPlayer;
 
   getRoom(pageId) {
     let connector = require('./../providers/connector.provider').default.prototype;
@@ -22,31 +22,38 @@ class RoomProvider {
     )
       .then(
       (data) => {
-        if (data.code === 201) {
-          this.pageId = pageId;
-          this.updateInfos(data.room);
-          connector.setWaitingForPlayer2Listener();
-          connector.setAttackListener();
-          AttackProvider.setCanAttack(true);
-          return this.room;
-        } else {
-          Promise.reject(data);
+        switch (data.code) {
+          case 201:
+            this.isFirstPlayer = true;
+            this.updateInfos(data.room);
+            connector.setWaitingForPlayer2Listener();
+            connector.setAttackListener();
+            return this.room;
+          case 202:
+            this.isFirstPlayer = false;
+            this.updateInfos(data.room);
+            connector.setAttackListener();
+            return this.room;
+          default:
+            Promise.reject(data);
         }
       })
   }
 
   updateInfos(newRoomInfos) {
-    console.log(this.pageId);
-    this.room = this.parseRoomBddToFront(newRoomInfos, this.pageId);
+    console.log(this.isFirstPlayer);
+    this.room = this.parseRoomBddToFront(newRoomInfos, this.isFirstPlayer);
+    console.log(this.room);
     store.dispatch(updateFightroomDataAction(this.room));
     if (newRoomInfos.winner) {
       const won = (newRoomInfos.winner === this.room.player.id);
+      AttackProvider.setCanAttack(false);
       store.dispatch(setWinnerAction(true, won));
     }
     return this.room;
   }
 
-  parseRoomBddToFront(roomData, pageId) {
+  parseRoomBddToFront(roomData, isFirstPlayer) {
     let battleLog = [];
     if (this.room && this.room.battleLog.length !== 0) {
       this.room.battleLog.forEach(
@@ -59,10 +66,14 @@ class RoomProvider {
       battleLog.push(roomData.battleLog);
     }
     let parsedRoom;
+
+    const player = this.parseButterflyBddToFront((isFirstPlayer ? roomData.butterfly1 : roomData.butterfly2), isFirstPlayer);
+    const enemy = roomData.butterfly2 ? this.parseButterflyBddToFront((!isFirstPlayer ? roomData.butterfly1 : roomData.butterfly2), !isFirstPlayer) : null;
+
     parsedRoom = {
       id: roomData.id || 0,
-      player: this.parseButterflyBddToFront((pageId ? roomData.butterfly1 : roomData.butterfly2), pageId),
-      enemy: this.parseButterflyBddToFront((!pageId ? roomData.butterfly1 : roomData.butterfly2), !pageId),
+      player: player,
+      enemy: enemy,
       battleLog: battleLog || [],
       winner: roomData.winner || null,
       cashpool: roomData.cashpool

@@ -83,9 +83,7 @@ module.exports = {
       .then(fighter => {
 
         if (!fighter) {
-          return res.status(404).send({
-            message: '404 Fighter not Found',
-          });
+          return null;
         }
         let data = fighter.toJSON()
         return butterfly.findById(data.butterflyId, {

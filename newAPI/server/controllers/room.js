@@ -11,29 +11,21 @@ const roomController = require('./room');
 module.exports = {
   createIo(butterfly) {
     return Room
-    .create({
-      name:'YOLOOOOOOOOOOO',
-      butterfly1: butterfly.id,
-      life1: butterfly.hp,
-      cashpool: 0
-    })
-    .then(room => {
-      return room;
-    })
-    .catch(error => {
-      return error;
-    });
+      .create({
+        name: 'YOLOOOOOOOOOOO',
+        butterfly1: butterfly.id,
+        attackerTurnId: butterfly.id,
+        winner: 0,
+        cashpool: 0
+      })
+      .then(room => {
+        return room;
+      })
+      .catch(error => {
+        return error;
+      });
   },
   create(req, res, butterfly) {
-
-
-
-    // let bf1 = butterfly.findById(req.body.butterfly1, {
-    //   attributes : ['id', 'name', 'catchphrase','hp'],
-    // });
-    // let bf2 = butterfly.findById(req.body.butterfly2, {
-    //   attributes : ['id', 'name', 'catchphrase','hp'],
-    // });
 
     return Room
       .create({
@@ -84,6 +76,7 @@ module.exports = {
         return fighterController.retrieveIo(data.butterfly1)
           .then(fighter1 => {
             data.butterfly1 = fighter1;
+            console.log('1', data);
             return fighterController.retrieveIo(data.butterfly2)
               .then(fighter2 => {
                 data.butterfly2 = fighter2;
@@ -118,41 +111,40 @@ module.exports = {
           });
         }
         return skill
-            .findById(req.body.skillId, {
-                attributes: ['id', 'name', 'base_attack', 'effect'],
+          .findById(req.body.skillId, {
+            attributes: ['id', 'name', 'base_attack', 'effect'],
           })
           .then(skill => {
-              return fighter
-                .findById(req.body.targetId)
-                .then(fighter => {
-                  let newlife = fighter.hp - skill.base_attack
-                  return fighter
+            return fighter
+              .findById(req.body.targetId)
+              .then(fighter => {
+                let newlife = fighter.hp - skill.base_attack
+                return fighter
                   .update({
                     hp: newlife || fighter.hp,
-                })
-                .then(fighter => {
+                  })
+                  .then(fighter => {
                     return module.exports.retrieveIo(req.body.roomId)
-                    .then(room => {
+                      .then(room => {
 
-                      let data = room
-                      let battleLog = {
-                        attackerId: req.body.attackerId,
-                        dmg: skill.base_attack,
-                        effect: skill.effect
-                      }
+                        let data = room
+                        let battleLog = {
+                          attackerId: req.body.attackerId,
+                          dmg: skill.base_attack,
+                          effect: skill.effect
+                        }
 
-                      data.battleLog = battleLog
-                      data.winner = null
+                        data.battleLog = battleLog
+                        data.winner = null
 
-                      if ( fighter.hp <= 0)
-                      {
-                        data.winner = req.body.attackerId
-                      }
-                      return data
-                    })
-                })
+                        if (fighter.hp <= 0) {
+                          data.winner = req.body.attackerId
+                        }
+                        return data
+                      })
+                  })
+              })
           })
-        })
       })
       .then(data => {
         return res.status(200).send(data);
@@ -164,57 +156,62 @@ module.exports = {
       .findById(attackinfo.roomId)
       .then(room => {
         if (!room) {
-          return res.status(404).send({
-            message: 'Room Not Found',
-          });
+          return {
+            message: 'Room not found',
+          };
         }
+
+        if (room.winner !== 0) {
+          return {
+            message: 'Fight already finished',
+          };
+        }
+
         if (attackinfo.attackerId != room.butterfly1 && attackinfo.attackerId != room.butterfly2) {
-          return res.status(404).send({
+          return {
             message: 'Invalid attacker',
-          });
+          };
         }
 
         if (attackinfo.targetId != room.butterfly1 && attackinfo.targetId != room.butterfly2) {
-          return res.status(404).send({
+          return {
             message: 'Invalid target',
-          });
+          };
         }
         return skill
-            .findById(attackinfo.skillId, {
-                attributes: ['id', 'name', 'base_attack', 'effect'],
+          .findById(attackinfo.skillId, {
+            attributes: ['id', 'name', 'base_attack', 'effect'],
           })
           .then(skill => {
-              return fighter
-                .findById(attackinfo.targetId)
-                .then(fighter => {
-                  let newlife = fighter.hp - skill.base_attack
-                  return fighter
+            return fighter
+              .findById(attackinfo.targetId)
+              .then(fighter => {
+                let newlife = fighter.hp - skill.base_attack
+                return fighter
                   .update({
-                    hp: newlife || fighter.hp,
-                })
-                .then(fighter => {
+                    hp: newlife,
+                  })
+                  .then(fighter => {
                     return module.exports.retrieveIo(attackinfo.roomId)
-                    .then(room => {
+                      .then(room => {
 
-                      let data = room
-                      let battleLog = {
-                        attackerId: attackinfo.attackerId,
-                        dmg: skill.base_attack,
-                        effect: skill.effect
-                      }
+                        let data = room
+                        let battleLog = {
+                          attackerId: attackinfo.attackerId,
+                          dmg: skill.base_attack,
+                          effect: skill.effect
+                        }
 
-                      data.battleLog = battleLog
-                      data.winner = null
+                        data.battleLog = battleLog
 
-                      if ( fighter.hp <= 0)
-                      {
-                        data.winner = attackinfo.attackerId
-                      }
-                      return data
-                    })
-                })
+                        if (fighter.hp <= 0) {
+                          data.winner = attackinfo.attackerId
+                        }
+                        return data
+                      })
+                  })
+              })
           })
-        })
       })
       .then(data => {
         return data;

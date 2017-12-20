@@ -3,8 +3,9 @@ const setInterval = require('timers').setInterval;
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const roomControl = require('./server/controllers/room')
-const butterflyControl = require('./server/controllers/butterfly')
+const roomControl = require('./server/controllers/room');
+const Room = require('./server/models').room;
+const fighterControl = require('./server/controllers/fighter');
 // const chatControl= require('./controllers/chat')
 // Set up the express app
 const app = express();
@@ -45,29 +46,47 @@ io.on('connection', function (socket) {
   */
   socket.on('room', function (requestroom, fn) {
     if (requestroom.combat == true) {
-      if (!roomControl.checkIfAnyRoomWithoutTwoPeople) {
-        let butterfly;
-        let clientroom;
-        butterflyControl.generateIo().then(
-          (data) => {
-            butterfly = data;
-            // TODO: change retrieveIo to createIo(butterfly)
-            roomControl.retrieveIo(5).then(
-              (data) => {
-                socket.join(data.id);
-                const response = { code: 201, room: data };
-                fn(response);
+      Room.findOne({ where: { butterfly2: null } }).then(
+        (foundRoom) => {
+          if (!foundRoom) {
+            let clientroom;
+            fighterControl.generateIo().then(
+              (fighter) => {
+                roomControl.createIo(fighter).then(
+                  (createdRoom) => {
+                    let partialRoomInfos = createdRoom.dataValues;
+                    roomControl.retrieveIo(partialRoomInfos.id).then(
+                      (roomInfos) => {
+                        socket.join(roomInfos.id);
+                        console.log('13', roomInfos);
+                        const response = { code: 201, room: roomInfos };
+                        fn(response);
+                      });
+                  }
+                );
+              }
+            );
+          } else {
+            fighterControl.generateIo().then(
+              (fighter) => {
+                foundRoom.update({ butterfly2: fighter.id }).then(
+                  (newRoomInfos) => {
+                    roomControl.retrieveIo(newRoomInfos.id).then(
+                      (data) => {
+                        socket.join(data.id);
+                        const response = { code: 202, room: data };
+                        console.log(data);
+                        socket.to(data.id).emit('newPlayer', data);
+                        fn(response);
+                      }
+                    );
+                  }
+                );
               }
             );
           }
-        );
-      }
-      else {
-        const clientroom = roomControl.findFirstBattleRoom;
-        socket.join(clientroom.name);
-        const response = { code: 202, room: clientroom };
-        fn(response);
-      }
+        }
+      )
     }
     else {
       const clientroom = roomControl.joinABetRoom;

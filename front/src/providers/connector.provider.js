@@ -28,10 +28,13 @@ class ConnectorProvider {
   }
 
   setWaitingForPlayer2Listener() {
-    // LoaderProvider.setLoader(true, 'En attente d\'un autre joueur')
-    this.socket.on('playerJoined', () => {
+    const roomProvider = require('./room.provider').default.prototype;
+    LoaderProvider.setLoader(true, 'En attente d\'un autre joueur')
+    this.socket.on('newPlayer', (newRoomInfos) => {
+      roomProvider.updateInfos(newRoomInfos);
+      AttackProvider.setCanAttack(true);
       LoaderProvider.setLoader(false, 'En attente d\'un autre joueur')
-      this.socket.removeListener('playerJoined');
+      this.socket.removeListener('newPlayer');
     });
   }
 

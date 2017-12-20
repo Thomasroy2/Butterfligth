@@ -38,7 +38,7 @@ class App extends Component {
         <LoaderComponent />
         <Router>
           <div>
-            <Route path='/fightroom/:id' exact component={FigthRoom} />
+            <Route path='/fightroom' exact component={FigthRoom} />
             <Route path='/' exact component={Login} />
             <Route path='/spectator' exact component={Spectator} />
           </div>

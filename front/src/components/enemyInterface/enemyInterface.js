@@ -17,31 +17,38 @@ class EnemyInterface extends Component {
   }
 
   render() {
-    let img = require('./../../assets/img/' + this.state.enemyInfos.pic)
-    return (
-      <div className="enemy-interface">
-        <div className="enemy-image-div">
-          <p>
-            <img className="taille" src={img} alt="logo" />
-          </p>
+    if (this.state.enemyInfos) {
+      let img = require('./../../assets/img/' + this.state.enemyInfos.pic)
+      return (
+        <div className="enemy-interface">
+          <div className="enemy-image-div">
+            <p>
+              <img className="taille" src={img} alt="logo" />
+            </p>
+          </div>
+          <div className="enemy-infos-component">
+            <h2>
+              Joueur 2
+            </h2>
+            <p>
+              <strong>Nom : </strong>
+              {this.state.enemyInfos.name}
+            </p>
+            <p>
+              <HpDetail
+                maxHp={this.state.enemyInfos.maxHp}
+                currentHp={this.state.enemyInfos.hp}
+              />
+            </p>
+          </div>
         </div>
-        <div className="enemy-infos-component">
-          <h2>
-            Joueur 2
-          </h2>
-          <p>
-            <strong>Nom : </strong>
-            {this.state.enemyInfos.name}
-          </p>
-          <p>
-            <HpDetail
-              maxHp={this.state.enemyInfos.maxHp}
-              currentHp={this.state.enemyInfos.hp}
-            />
-          </p>
+      );
+    } else {
+      return (
+        <div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
