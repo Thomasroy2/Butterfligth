@@ -31,7 +31,7 @@ class AttackProvider {
             'attack',
             params,
             true,
-            ''
+            'Attacking'
         ).then(
             (room) => {
                 roomProvider.updateInfos(room);

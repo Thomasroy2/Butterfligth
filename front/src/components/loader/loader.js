@@ -9,7 +9,7 @@ class LoaderComponent extends Component {
     const customStyles = {
       content: {
         top: '45%',
-        left: '50%',
+        left: '38%',
         right: 'auto',
         bottom: 'auto',
         padding: '0'
