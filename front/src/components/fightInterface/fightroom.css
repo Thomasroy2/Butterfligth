@@ -31,9 +31,14 @@
   .player-bouton-div .button {
     margin: 0 auto; }
     .player-bouton-div .button button {
-      color: white;
+      color: black;
       border-color: grey;
-      background-color: grey;
+      background-color: white;
       height: 100px;
       min-width: 150px;
-      margin: 10px 0; }
+      margin: 10px 0;
+      border-width: 1px;
+      border-color: #ef43d6;
+      border-style: solid;
+      border-radius: 10px;
+      font-size: 18px; }

@@ -34,7 +34,10 @@ class PlayerInterface extends Component {
         left: '38%',
         right: '38%',
         bottom: 'auto',
-        padding: '0'
+        padding: '0',
+        borderRadius: '10px',
+        background: 'rgba(255, 255, 255, 0.75)',
+        border: '4px solid #ef43d6',
       }
     }
     return (

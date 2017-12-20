@@ -8,10 +8,13 @@ class MatchEnded extends Component {
     const customStyles = {
       content: {
         top: '45%',
-        left: '50%',
+        left: '45%',
         right: 'auto',
         bottom: 'auto',
-        padding: '0'
+        padding: '0',
+        borderRadius: '10px',
+        background: 'rgba(255, 255, 255, 0.75)',
+        border: '4px solid #ef43d6'
       }
     }
     console.log(this.props);
