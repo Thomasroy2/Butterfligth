@@ -1,9 +1,5 @@
 import { connect } from 'react-redux';
 import BattleLog from './../components/battleLog/battleLog';
-import {
-    changeAttackState as changeAttackStateAction,
-    updatefightroomData as updatefightroomDataAction
-} from './../actions';
 
 const mapStateToProps = (state) => {
 
@@ -16,9 +12,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchProps = (dispatch) => {
     return {
-        updatefightroomDataAction: (newData) => {
-            dispatch(changeAttackStateAction(newData));
-        }
     }
 }
 

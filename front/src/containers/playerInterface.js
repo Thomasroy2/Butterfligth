@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import PlayerInterface from './../components/fightInterface/playerInterface';
 import {
-    changeAttackState as changeAttackStateAction,
-    updatefightroomData as updatefightroomDataAction
+    changeAttackState as changeAttackStateAction
 } from './../actions';
 
 const mapStateToProps = (state) => {
@@ -20,9 +19,6 @@ const mapDispatchProps = (dispatch) => {
     return {
         changeLoadingState: (newState) => {
             dispatch(changeAttackStateAction(newState));
-        },
-        updatefightroomDataAction: (newData) => {
-            dispatch(changeAttackStateAction(newData));
         }
     }
 }

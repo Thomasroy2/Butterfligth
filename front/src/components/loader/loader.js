@@ -4,9 +4,7 @@ import Modal from 'react-modal';
 import Loader from 'react-loaders';
 
 class LoaderComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
+  
   render() {
     const customStyles = {
       content: {

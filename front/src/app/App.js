@@ -9,10 +9,6 @@ import {
   Route,
 } from 'react-router-dom';
 
-{/* <Modal isOpen={this.state.matchEnded} style={customStyles}>
-{this.state.won ? 'Vous avez gagnez!' : 'Vous avez perdu!'}
-</Modal> */}
-
 class App extends Component {
 
   connector = require('./../providers/connector.provider').default.prototype;

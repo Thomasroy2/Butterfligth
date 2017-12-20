@@ -36,6 +36,7 @@ class RoomProvider {
   }
 
   updateInfos(newRoomInfos) {
+    console.log(this.pageId);
     this.room = this.parseRoomBddToFront(newRoomInfos, this.pageId);
     store.dispatch(updateFightroomDataAction(this.room));
     if (newRoomInfos.winner) {
@@ -48,7 +49,7 @@ class RoomProvider {
   parseRoomBddToFront(roomData, pageId) {
     let battleLog = [];
     if (this.room && this.room.battleLog.length !== 0) {
-      this.room.battleLog.map(
+      this.room.battleLog.forEach(
         (roomBattleLog) => {
           battleLog.push(roomBattleLog);
         }
@@ -66,12 +67,6 @@ class RoomProvider {
       winner: roomData.winner || null,
       cashpool: roomData.cashpool
     }
-
-    // if (roomData.battleLog != null) {
-    //   parsedRoom.battleLog.push(roomData.battleLog);
-    // } else {
-    //   parsedRoom.battleLog = [];
-    // }
 
     return parsedRoom;
   }

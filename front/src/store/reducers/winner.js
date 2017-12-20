@@ -1,8 +1,8 @@
 import { SET_WINNER } from './../../actions';
 
 const initialState = {
-  matchEnded: false,
-  winner: null
+    matchEnded: false,
+    winner: null
 };
 
 export default (state = initialState, action) => {
@@ -14,6 +14,9 @@ export default (state = initialState, action) => {
                 matchEnded: action.payload.matchEnded,
                 won: action.payload.won
             }
+        default:
+            console.error('Action non traité dans ce reducer');
+            break;
     }
 
     return state
