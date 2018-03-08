@@ -58,7 +58,6 @@ io.on('connection', function (socket) {
                     roomControl.retrieveIo(partialRoomInfos.id).then(
                       (roomInfos) => {
                         socket.join(roomInfos.id);
-                        console.log('13', roomInfos);
                         const response = { code: 201, room: roomInfos };
                         fn(response);
                       });
@@ -101,7 +100,7 @@ io.on('connection', function (socket) {
   */
 
   socket.on('betchat', function (message) {
-    if (chatControl.isInsult(message.msg)) {
+    if (!chatControl.isInsult(message.msg)) {
       chatControl.storeMessage(message.author, message.msg);
       io.to(message.room).emit('newMessage', {
         message: message.msg,
@@ -109,10 +108,9 @@ io.on('connection', function (socket) {
       });
     }
     else {
-      const punition = "N'a pas insulté ses adversaires";
       chatControl.storeMessage(message.author, punition);
       io.to(message.room).emit('newMessage', {
-        message: punition,
+        message: "A insulté les autres parieurs",
         author: message.author
       });
     }
