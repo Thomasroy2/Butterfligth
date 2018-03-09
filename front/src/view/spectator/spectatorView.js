@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ChatInterface from './../../components/chatInterface/chatInterface';
 import PariInterface from './../../components/pariInterface/pariInterface';
+import FightInterface from './../../components/betFightZone/betFightZone';
 import './spectatorView.css';
 
 class SpectatorView extends Component {
@@ -9,7 +10,8 @@ class SpectatorView extends Component {
         return (
             <div>
                 <div className="spectator-interface-chat">
-                    <div className="vide-interface-div">
+                    <div className="fight-interface-div">
+                        <FightInterface/>
                     </div>
                     <div className="chat-interface-div">
                         <ChatInterface/>

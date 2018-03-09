@@ -221,7 +221,7 @@ module.exports = {
 
 
 
-  newBet(req, res) {
+  newBetRoom(req, res) {
     return Room
       .findById(req.params.roomId)
       .then(room => {

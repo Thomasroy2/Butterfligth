@@ -5,23 +5,24 @@ class ChatInterface extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          fighter1: props.betroom.betroom.fighter1,
-          fighter2: props.betroom.betroom.fighter2,
+          chat: props.betroom.betroom.chat
         }
       }
     
       componentWillReceiveProps(props) {
         this.setState({
-            fighter1: props.betroom.betroom.fighter1,
-            fighter2: props.betroom.betroom.fighter2,
+            chat: props.betroom.betroom.chat
         });
       }
     render() {
+        const mapedChat=this.state.chat.map((message)=>
+            <p><strong>{message.author}</strong> : {message.message}</p>
+            
+    );
         return (
             <div class="zone-chat">
                 <h2>Zone de chat</h2>
-                <textarea>
-                </textarea>
+                {mapedChat}
             </div>
         )
     }

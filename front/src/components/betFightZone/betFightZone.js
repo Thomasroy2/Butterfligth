@@ -61,3 +61,4 @@ class BetFightZone extends Component {
         );
     }
 }
+export default BetFightZone;
