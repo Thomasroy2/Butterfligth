@@ -22,12 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue:false,
     },
     amount:{
-       type:DataTypes.INT,
+       type:DataTypes.INTEGER,
        allowNull: false,
        defaultValue:0,
       },
     room:{
-      type: DataTypes.INT,
+      type: DataTypes.INTEGER,
       references:{
         model:'room',
         key:'id',

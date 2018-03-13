@@ -16,8 +16,6 @@ module.exports = (app) => {
 
    app.get('/api/room/:roomId', roomController.retrieve);
 
-   app.post('/api/room/:roomId/bet', roomController.newBet);
-
    app.post('/api/fighter/new', fighterController.generate);
 
    app.post('/api/room/attack', roomController.attack);

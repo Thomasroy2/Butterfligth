@@ -39,7 +39,10 @@ class RoomProvider {
         }
       })
   }
-
+  getBetRoom(){
+    let connector = require('./../providers/connector.provider').default.prototype;
+    return connector.sendRequest('betroom')
+  }
   updateInfos(newRoomInfos) {
     console.log(this.isFirstPlayer);
     this.room = this.parseRoomBddToFront(newRoomInfos, this.isFirstPlayer);
@@ -76,7 +79,8 @@ class RoomProvider {
       enemy: enemy,
       battleLog: battleLog || [],
       winner: roomData.winner || null,
-      cashpool: roomData.cashpool
+      cashpoolfighter1: roomData.cashpoolfighter1,
+      cashpoolfighter2:roomData.cashpoolfighter2,
     }
 
     return parsedRoom;

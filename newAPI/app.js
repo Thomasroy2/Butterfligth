@@ -7,7 +7,7 @@ const roomControl = require('./server/controllers/room');
 const betControl = require('./server/controllers/bet');
 const Room = require('./server/models').room;
 const fighterControl = require('./server/controllers/fighter');
-const chatControl= require('./controllers/chat')
+// const chatControl= require('./controllers/chat')
 // Set up the express app
 const app = express();
 
@@ -101,20 +101,20 @@ io.on('connection', function (socket) {
   */
 
   socket.on('betchat', function (message) {
-    if (!chatControl.isInsult(message.msg)) {
+    // if (!chatControl.isInsult(message.msg)) {
       //chatControl.storeMessage(message.author, message.msg);
       socket.to(message.room).emit('newMessage', {
         message: message.msg,
         author: message.author
       });
-    }
-    else {
-      //chatControl.storeMessage(message.author, punition);
-      socket.to(message.room).emit('newMessage', {
-        message: "A insulté les autres parieurs",
-        author: message.author
-      });
-    }
+    // }
+    // else {
+    //   //chatControl.storeMessage(message.author, punition);
+    //   socket.to(message.room).emit('newMessage', {
+    //     message: "A insulté les autres parieurs",
+    //     author: message.author
+    //   });
+    // }
 
   });
   /**

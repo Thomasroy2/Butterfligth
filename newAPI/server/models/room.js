@@ -28,7 +28,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    cashpool: {
+    cashpoolfighter1: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    cashpoolfighter2: {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },

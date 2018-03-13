@@ -47,6 +47,11 @@ class ConnectorProvider {
       }
     })
   }
+
+  setChatListener()
+  {
+    
+  }
 }
 
 export default ConnectorProvider;

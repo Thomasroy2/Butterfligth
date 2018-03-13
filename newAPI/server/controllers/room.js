@@ -16,7 +16,8 @@ module.exports = {
         butterfly1: butterfly.id,
         attackerTurnId: butterfly.id,
         winner: 0,
-        cashpool: 0
+        cashpoolfighter1: 0,
+        cashpoolfighter2:0
       })
       .then(room => {
         return room;
@@ -217,28 +218,17 @@ module.exports = {
         return data;
       });
   },
-
-
-
-
-  newBetRoom(req, res) {
+  retrieveBetRoom(){
     return Room
-      .findById(req.params.roomId)
-      .then(room => {
-        if (!room) {
-          return res.status(404).send({
-            message: 'Room Not Found',
-          });
-        }
-        let newcashpool = room.cashpool + req.body.bet;
-        return room
-          .update({
-            cashpool: newcashpool,
-          })
-          .then(() => res.status(200).send(room))  // Send back the updated room.
-          .catch((error) => res.status(400).send(error));
-      })
-      .catch((error) => res.status(400).send(error));
-  },
+      .findAll({
+        limit:1,
+        where:{
 
+        },
+        order:[['createdAt','DESC']]
+      })
+      .then(roomfound=>{
+        
+      })
+  },
 };
