@@ -42,7 +42,7 @@ class ConnectorProvider {
     const roomProvider = require('./room.provider').default.prototype;
     this.socket.on('attackUsed', (roomInfo) => {
       roomProvider.updateInfos(roomInfo);
-      roomProvider.updateBetRoomInfos(roomInfo);
+      // roomProvider.updateBetRoomInfos(roomInfo);
       if (!roomInfo.winner) {
         AttackProvider.setCanAttack(true);
       }
