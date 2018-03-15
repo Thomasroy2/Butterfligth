@@ -5,13 +5,15 @@ class ChatInterface extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          chat: props.betroom.betroom.chat
+          chat: props.chat,
+          author:props.author,
+          message:props.message
         }
       }
     
       componentWillReceiveProps(props) {
         this.setState({
-            chat: props.betroom.betroom.chat
+            chat: props.chat
         });
       }
     render() {
@@ -23,7 +25,16 @@ class ChatInterface extends Component {
             <div class="zone-chat">
                 <h2>Zone de chat</h2>
                 {mapedChat}
+                <form onSubmit={this.sendMessage}>
+                    <input id="messageInput"type="text" onChange={this.newMessage} value={this.state.message}/>
+                    <label>
+                        Post as:
+                        <input type="text" value={this.state.author} onChange={this.changeAuthor}/>
+                    </label>
+                    <input type="submit" value="Send Message" />
+                </form>
             </div>
+            
         )
     }
 }

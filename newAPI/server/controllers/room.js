@@ -6,7 +6,20 @@ const fighter = require('../models').fighter;
 const fighterController = require('./fighter');
 const roomController = require('./room');
 
-
+function changeRoomIntoBetRoom(room)
+{
+  let intermediateRoom={
+    "id":room.id,
+    "name":room.name,
+    "fighter1":room.butterfly1,
+    "fighter2":room.butterfly2,
+    "attackerTurnId":room.attackerTurnId,
+    "winner":room.winner,
+    "cashpoolfighter1":room.cashpoolfighter1,
+    "cashpoolfighter2":room.cashpoolfighter2
+  }
+  return intermediateRoom;
+}
 
 module.exports = {
   createIo(butterfly) {
@@ -228,7 +241,26 @@ module.exports = {
         order:[['createdAt','DESC']]
       })
       .then(roomfound=>{
-        
+        if(!roomfound)
+        {
+          return null;
+        }
+        let data=changeRoomIntoBetRoom(roomfound);
+        return fighter
+                .findById(data.fighter1)
+                .then(fighter1=>{
+                  data.fighter1=fighter1;
+                  return fighter
+                          .findById(data.fighter2)
+                          .then(fighter2=>{
+                            data.fighter2=fighter2;
+                            return data;
+                          })
+                })
       })
+      .then(data=>{
+        return data;
+      })
+
   },
 };

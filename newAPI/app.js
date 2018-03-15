@@ -96,6 +96,16 @@ io.on('connection', function (socket) {
     }
   });
 
+  socket.on('betroom',function(fn){
+    roomControl.retrieveBetRoom().then(room=>{
+      if(!room)
+      {
+        fn({"error":"Couldn t find a betroom"})
+      }
+      const response ={code:202, room:room};
+      fn(response);
+    })
+  })
   /**
   * Envoi de message sur le chat de paris.
   */

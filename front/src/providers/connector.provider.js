@@ -42,6 +42,7 @@ class ConnectorProvider {
     const roomProvider = require('./room.provider').default.prototype;
     this.socket.on('attackUsed', (roomInfo) => {
       roomProvider.updateInfos(roomInfo);
+      roomProvider.updateBetRoomInfos(roomInfo);
       if (!roomInfo.winner) {
         AttackProvider.setCanAttack(true);
       }
@@ -50,7 +51,10 @@ class ConnectorProvider {
 
   setChatListener()
   {
-    
+    const roomProvider = require('./room.provider').default.prototype;
+    this.socket.on('newMessage', (message) =>{
+      
+    })
   }
 }
 

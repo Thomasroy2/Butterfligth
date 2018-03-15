@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ChatInterface from './../../components/chatInterface/chatInterface';
-import PariInterface from './../../components/pariInterface/pariInterface';
+import BetInterface from './../../components/betInterface/betInterface';
 import FightInterface from './../../components/betFightZone/betFightZone';
 import './spectatorView.css';
 
@@ -18,8 +18,8 @@ class SpectatorView extends Component {
                     </div>
                 </div>
                 <div className="spectator-interface-bas">
-                    <div className="pari-interface-div">
-                         <PariInterface/>
+                    <div className="bet-interface-div">
+                         <BetInterface/>
                     </div>
                 </div>
             </div>

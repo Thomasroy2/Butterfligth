@@ -1,7 +1,8 @@
 import AttackProvider from './attack.provider';
 import {
   updateFightroomData as updateFightroomDataAction,
-  setWinner as setWinnerAction
+  setWinner as setWinnerAction,
+  updateBetroomData as updateBetroomDataAction,
 } from './../actions';
 import store from '../store/index';
 
@@ -41,7 +42,17 @@ class RoomProvider {
   }
   getBetRoom(){
     let connector = require('./../providers/connector.provider').default.prototype;
-    return connector.sendRequest('betroom')
+    return connector.sendRequest('betroom',{},false,'')
+      .then(data=>{
+        switch (data.code){
+          case 202:
+            this.updateBetRoomInfos(data.room);
+            connector.setChatListener();
+            connector.setBetListener();
+            connector.setAttackListener();
+            return this.room;
+        }
+      })
   }
   updateInfos(newRoomInfos) {
     console.log(this.isFirstPlayer);
@@ -55,6 +66,7 @@ class RoomProvider {
     }
     return this.room;
   }
+  
 
   parseRoomBddToFront(roomData, isFirstPlayer) {
     let battleLog = [];
@@ -121,7 +133,29 @@ class RoomProvider {
     })
     return parsedButterfly;
   }
+  updateBetRoomInfos(newRoomInfos)
+  {
+    this.room = this.parseBetRoomBddToFront(newRoomInfos);
+    store.dispatch(updateBetroomDataAction(this.room));
+    return this.room;
+  }
 
+  parseBetRoomBddToFront(roomData) {
+    
+    let parsedRoom;
+    const fighter1=this.parseButterflyBddToFront(roomData.fighter1,true);
+    const fighter2=this.parseButterflyBddToFront(roomData.fighter2,false);
+    parsedRoom = {
+      id: roomData.id || 0,
+      fighter1: fighter1,
+      fighter2: fighter2,
+      winner: roomData.winner || null,
+      cashpoolfighter1: roomData.cashpoolfighter1,
+      cashpoolfighter2:roomData.cashpoolfighter2,
+    }
+
+    return parsedRoom;
+  }
 }
 
 export default RoomProvider;
